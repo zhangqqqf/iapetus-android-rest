@@ -1,0 +1,9 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.android.mark.entity">
+	<class name="AndroidMobileID" table="tt_android_app_mobile_id">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="mobileId" column="mobile_id" type="string"/>
+	</class>
+</hibernate-mapping>

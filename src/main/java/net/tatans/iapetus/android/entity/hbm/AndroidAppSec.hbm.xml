@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.iapetus.android.entity">
+	<class name="AndroidAppSec" table="tt_android_app_sec">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="appName" column="app_name" type="string"/>
+		<property name="decription" column="decription" type="string"/>
+		<property name="packageName" column="package_name" type="string"/>
+		<property name="versionCode" column="version_code" type="integer"/>
+		<property name="versionName" column="version_name" type="string"/>
+		<property name="down" column="down" type="integer"/>
+		<property name="iconUrl" column="icon_url" type="string"/>
+		<property name="url" column="url" type="string"/>
+		<property name="size" column="size" type="string"/>
+		<property name="tag" column="tag" type="string"/>
+		<property name="weight" column="weight" type="integer"/>
+		<property name="mobileModel" column="mobileModel" type="string"/>
+		<many-to-one name="channel" column="channel_id" class="AndroidChannelSec" not-null="false"/>
+	</class>
+</hibernate-mapping>

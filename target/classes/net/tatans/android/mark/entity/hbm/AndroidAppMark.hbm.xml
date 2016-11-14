@@ -1,0 +1,17 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.android.mark.entity">
+	<class name="AndroidAppMark" table="tt_android_app_mark">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="packageName" column="packageName" type="string"/>
+		<property name="packageSignature" column="packageSignature" type="string"/>
+		<property name="viewName" column="viewName" type="string"/>
+		<property name="text" column="text" type="string"/>
+		<property name="locale" column="locale" type="string"/>
+		<property name="packageVersion" column="packageVersion" type="integer"/>
+		<property name="screenshotPath" column="screenshotPath" type="string"/>
+		<property name="timestamp" column="timestamp" type="string"/>
+		<property name="markVersion" column="markVersion" type="string"/>
+	</class>
+</hibernate-mapping>

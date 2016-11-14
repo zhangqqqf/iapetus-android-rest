@@ -1,0 +1,34 @@
+package net.tatans.iapetus.android.manager;
+
+import java.util.List;
+
+import net.tatans.android.common.page.Pagination;
+import net.tatans.iapetus.android.entity.AndroidAppSec;
+
+
+public interface AndroidAppSecMng{
+
+	public AndroidAppSec findById(Integer id);
+
+	public Pagination findBychannelId(Integer channelId, Integer pageNo, Integer pageSize);
+	
+	public List<AndroidAppSec> deleteByIds(Integer[] ids);
+	
+	public AndroidAppSec update(AndroidAppSec bean);
+
+	public boolean save(AndroidAppSec bean);
+
+	public List<AndroidAppSec> findNewsApps(String mobileModel);
+
+	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
+
+	public Pagination findclassifyAppsByChannelName(String channelName, int pageNo, String mobileModel);
+
+	public Pagination searchAppByAppName(String appName,int pageNo, String mobileModel);
+
+	public Pagination findSpecifyApps(String appName, String mobileModel);
+
+	public Pagination findAppsByTag(String tag, Integer pageNo, String mobileModel);
+
+	public String validaApp(String imei, String sign);
+}

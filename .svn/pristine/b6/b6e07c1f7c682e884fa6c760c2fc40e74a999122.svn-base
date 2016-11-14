@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>base</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/config/application-context.xml
+			/WEB-INF/config/iapetus-android-context.xml
+		</param-value>
+	</context-param>
+
+
+	<filter>
+		<filter-name>processTime</filter-name>
+		<filter-class>net.tatans.android.common.web.ProcessTimeFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>osivFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+
+
+
+	<!--@分隔 -->
+	<filter>
+		<filter-name>XssFilter</filter-name>
+		<filter-class>net.tatans.android.common.web.XssFilter</filter-class>
+		<init-param>
+			<param-name>SplitChar</param-name>
+			<param-value>@</param-value>
+		</init-param>
+		<init-param>
+			<param-name>FilterChar</param-name>
+			<param-value>'@"@\@#@:@%@></param-value>
+		</init-param>
+		<init-param>
+			<param-name>ReplaceChar</param-name>
+			<param-value>\'@\"@＼@＃@：@\\%@＞</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>processTime</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>processTime</filter-name>
+		<url-pattern>*.jspx</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.jspx</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.jspx</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>processTime</filter-name>
+		<url-pattern>*.jhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.jhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.jhtml</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>processTime</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>processTime</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>XssFilter</filter-name>
+		<url-pattern>*.jspx</url-pattern>
+	</filter-mapping>
+
+
+
+	<!-- servlet servlet servlet servlet servlet servlet servlet -->
+	<servlet>
+		<servlet-name>Restservlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/rest-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>Restservlet</servlet-name>
+		<url-pattern>/rest/v1.0/*</url-pattern>
+	</servlet-mapping>
+
+
+
+	<!-- listener listener listener listener listener listener listener listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.shtml</welcome-file>
+		<welcome-file>index.jhtml</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/error/403.html</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	<mime-mapping>
+		<extension>rar</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>doc</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ppt</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>pdf</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>xls</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>wps</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+</web-app>

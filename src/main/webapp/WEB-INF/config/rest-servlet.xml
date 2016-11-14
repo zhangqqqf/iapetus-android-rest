@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="cacheSeconds" value="-1" />
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/languages/cmscore_admin/messages</value>
+				<value>/WEB-INF/languages/cms_admin/messages</value>
+				<value>/WEB-INF/languages/cms_tpl/messages</value>
+				<value>/WEB-INF/languages/fck/messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<!-- <bean id="multipartResolver" class="net.tatans.android.common.web.cos.CosMultipartResolver"/> -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean
+				class="net.tatans.android.common.web.springmvc.BindingInitializer" />
+		</property>
+		<!--JSON转换器 -->
+		<property name="messageConverters">
+			<list>
+				<bean id="stringHttpMessageConverter"
+       				 class="org.springframework.http.converter.StringHttpMessageConverter">
+       				 <property name="supportedMediaTypes">
+			            <list>
+			                <bean class="org.springframework.http.MediaType">
+			                    <constructor-arg value="text" />
+			                    <constructor-arg value="plain" />
+			                    <constructor-arg value="UTF-8" />
+			                </bean>
+			            </list>
+        			</property>
+   				 </bean>
+   				<bean  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/config/firewall.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="clientlanguage" />
+		<property name="cookieMaxAge" value="-1" />
+	</bean>
+
+	<!-- View resolvers -->
+	<!-- View exception resolver -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop
+					key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop>
+				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
+				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
+				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<context:annotation-config />
+	<context:component-scan base-package="net.tatans.iapetus.android.rest"></context:component-scan>
+	<context:component-scan base-package="net.tatans.android.mark.service"></context:component-scan>
+	<context:component-scan base-package="net.tatans.android.help.service"></context:component-scan>
+	<!--包含action <import resource="rest-servlet-action.xml"/> -->
+
+
+</beans>

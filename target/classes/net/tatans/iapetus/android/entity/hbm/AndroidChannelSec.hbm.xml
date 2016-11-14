@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.iapetus.android.entity">
+	<class name="AndroidChannelSec" table="tt_android_channel_sec" dynamic-update="true">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write" />
+		<id name="id" type="java.lang.Integer" column="channel_id">
+			<generator class="identity" />
+		</id>
+		<property name="channelName" column="channel_name" type="string" not-null="false" length="30"></property>
+		<property name="lft" column="lft" type="integer" not-null="true" length="10"/>
+		<property name="rgt" column="rgt" type="integer" not-null="true" length="10"/>
+		<property name="priority" column="priority" type="integer" not-null="true" length="10"/>
+		<property name="hasContent" column="has_content" type="java.lang.Boolean" not-null="true"/>
+		<property name="display" column="is_display" type="java.lang.Boolean" not-null="true"/>
+		<many-to-one name="parent" column="parent_id" class="AndroidChannelSec" not-null="false"/>
+		<set name="child" inverse="true" cascade="delete" sort="net.tatans.android.common.hibernate3.PriorityComparator">
+			<cache usage="read-write"/>
+			<key column="parent_id"/>
+			<one-to-many class="AndroidChannelSec"/>
+		</set>
+		<set name="apps" table="tt_android_app_sec" inverse="true"  cascade="delete"  sort="net.tatans.android.common.hibernate3.PriorityComparator">
+			<cache usage="read-write"/>
+			<key column="channel_id"/>
+			<one-to-many  class="AndroidAppSec"/>
+		</set>
+	</class>
+</hibernate-mapping>

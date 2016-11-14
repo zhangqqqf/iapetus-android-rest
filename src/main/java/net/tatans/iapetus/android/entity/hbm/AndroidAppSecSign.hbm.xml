@@ -1,0 +1,11 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.iapetus.android.entity">
+	<class name="AndroidAppSecSign" table="tt_android_app_sec_sign">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="sign" column="sign" type="string"/>
+		<property name="mobileModel" column="mobileModel" type="string"/>
+		<!-- <many-to-one name="channel" column="channel_id" class="net.tatans.iapetus.android.entity.AndroidChannel" not-null="false"/> -->
+	</class>
+</hibernate-mapping>
