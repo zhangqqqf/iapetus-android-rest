@@ -2,11 +2,15 @@ package net.tatans.iapetus.android.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Transaction;
+
 import net.tatans.android.common.hibernate3.Finder;
 import net.tatans.android.common.hibernate3.HibernateBaseDao;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.rest.util.Constans;
 
 public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Integer> implements AndroidAppSecDao {
@@ -70,7 +74,16 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		List<AndroidAppSec> list = find(finder);
 		return list;
 	}
-
+	@Override
+	public int updateSumDownloadApp(SumDownLoadApp bean) {
+		
+		Transaction trans=getOpenSession().beginTransaction();
+		String hql="update SumDownLoadApp tt set tt.count=tt.count+1 where tt.packageName='"+bean.getPackageName()+"'";
+		Query queryupdate=getOpenSession().createQuery(hql);
+		int ret=queryupdate.executeUpdate();
+		trans.commit();
+		return ret;
+	}
 	@Override
 	public Pagination findclassifyAppsByChannelName(String channelName, int pageNo, String mobileModel) {
 		Finder f=Finder.create("from AndroidAppSec bean where bean.channel.channelName=:channelName and ( bean.mobileModel='all' or bean.mobileModel=:mobileModel ) order by weight desc ");

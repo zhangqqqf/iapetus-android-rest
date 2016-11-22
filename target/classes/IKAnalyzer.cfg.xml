@@ -5,5 +5,4 @@
 	<!--用户可以在这里配置自己的扩展停止词字典-->
 	<entry key="ext_dict">net/tatans/base/common/dic/mydict.dic;</entry> 
 	<entry key="ext_stopwords">net/tatans/base/common/dic/stopword.dic;net/tatans/base/common/dic/ext_stopword.dic;</entry> 
-	
 </properties>

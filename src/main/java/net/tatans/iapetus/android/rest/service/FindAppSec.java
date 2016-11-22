@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
+import net.tatans.iapetus.android.entity.AndroidApp;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 import net.tatans.iapetus.android.rest.util.JsonMapper;
 import net.tatans.iapetus.android.rest.util.StringUtil;
@@ -65,6 +67,21 @@ public class FindAppSec {
 			e.printStackTrace();
 		}
 	 	return StringUtil.toResponseStr(true, "\"pageNo\":"+pageNo+",\"pageCount\":"+page.getTotalPage(), json);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/sumDownloadCount.do")
+	public String sumDownloadCount(String packagename,
+			HttpServletRequest request) {
+		SumDownLoadApp sum = new SumDownLoadApp();
+		sum.setId(2);
+		sum.setPackageName("aaa");
+		sum.setCount(1);
+		int intCount=mng.updateSumDownloadApp(sum);
+		if(intCount==1){
+			return true+"";
+		}else{
+			return false+"";
+		}
 	}
 	/**
 	 * 根据标签名查询APP

@@ -7,6 +7,7 @@ import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,11 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	public List<AndroidAppSec> findNewsApps(String mobileModel) {
 		return dao.findNewsApps(mobileModel);
 	}
-
+	@Override
+	public int updateSumDownloadApp(SumDownLoadApp bean) {
+		// TODO Auto-generated method stub
+		return dao.updateSumDownloadApp(bean);
+	}
 	@Override
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel) {
 		return dao.findNewAppByPackageName(packagename,mobileModel);

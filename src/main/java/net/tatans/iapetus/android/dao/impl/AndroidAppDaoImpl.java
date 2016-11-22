@@ -7,6 +7,7 @@ import net.tatans.android.common.hibernate3.HibernateBaseDao;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppDao;
 import net.tatans.iapetus.android.entity.AndroidApp;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.rest.util.Constans;
 
 public class AndroidAppDaoImpl extends HibernateBaseDao<AndroidApp, Integer> implements AndroidAppDao {
@@ -53,7 +54,7 @@ public class AndroidAppDaoImpl extends HibernateBaseDao<AndroidApp, Integer> imp
 			return false;
 		}
 	}
-
+	
 	@Override
 	public List<AndroidApp> findNewsApps() {
 		Finder finder=Finder.create("from AndroidApp bean group by bean.packageName order by weight desc ");

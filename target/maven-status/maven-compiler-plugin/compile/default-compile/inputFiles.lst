@@ -59,6 +59,7 @@ C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\core\web\front\URLHelper.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\web\freemarker\MustBooleanException.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\web\cos\MultipartParser.java
+C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\iapetus\android\entity\SumDownLoadApp.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\email\EmailSendTool.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\web\WebDirective.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\security\rememberme\TokenBasedRememberMeServices.java
@@ -100,6 +101,7 @@ C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\iapetus\android\entity\Imei.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\core\dao\impl\ConfigDaoImpl.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\core\entity\base\BaseDbFile.java
+C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\iapetus\android\entity\base\BaseSumDownloadApp.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\web\springmvc\SimpleFreeMarkerViewResolver.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\image\AverageImageScale.java
 C:\Users\Yuliang\workspace\iapetus-android-rest\src\main\java\net\tatans\android\common\page\SimplePage.java

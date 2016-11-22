@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import net.tatans.iapetus.android.entity.AndroidApp;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppMng;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 import net.tatans.iapetus.android.rest.util.JsonMapper;

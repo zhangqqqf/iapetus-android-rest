@@ -1,8 +1,8 @@
 package net.tatans.iapetus.android.entity;
 
-import net.tatans.iapetus.android.entity.base.BaseAndroidApp;
+import net.tatans.iapetus.android.entity.base.BaseSumDownloadApp;
 
-public class SumDownLoadApp extends BaseAndroidApp{
+public class SumDownLoadApp extends BaseSumDownloadApp{
 	/**
 	 * 
 	 */
@@ -12,11 +12,8 @@ public class SumDownLoadApp extends BaseAndroidApp{
 		super();
 	}
 
-	public SumDownLoadApp(Integer id,String appName, String decription,
-			String packageName, Integer versionCode, String versionName,
-			AndroidChannel channel,String tag, Integer weight) {
-		super(id, appName, decription, packageName, versionCode, versionName, channel,tag, weight);
+	public SumDownLoadApp(Integer id, Integer sumNumber, String packageName) {
+		super(id, sumNumber, packageName);
 	}
 
-	
 }

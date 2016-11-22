@@ -192,4 +192,7 @@ public abstract class HibernateSimpleDao {
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	protected Session getOpenSession() {
+		return sessionFactory.openSession();
+	}
 }

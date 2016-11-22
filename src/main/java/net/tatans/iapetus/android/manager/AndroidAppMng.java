@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidApp;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 
 
 public interface AndroidAppMng{
@@ -17,7 +18,7 @@ public interface AndroidAppMng{
 	public AndroidApp update(AndroidApp bean);
 
 	public boolean save(AndroidApp bean);
-
+	
 	public List<AndroidApp> findNewsApps();
 
 	public AndroidApp findNewAppByPackageName(String packagename);

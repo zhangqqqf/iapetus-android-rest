@@ -7,6 +7,7 @@ import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppDao;
 import net.tatans.iapetus.android.entity.AndroidApp;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppMng;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class AndroidAppMngImpl implements AndroidAppMng {
 	public boolean save(AndroidApp bean) {
 		return dao.save(bean);
 	}
-
+	
+	
 	@Override
 	public List<AndroidApp> findNewsApps() {
 		return dao.findNewsApps();
@@ -89,5 +91,6 @@ public class AndroidAppMngImpl implements AndroidAppMng {
 	public Pagination findAppsByTag(String tag, Integer pageNo){
 		return dao.findAppsByTag(tag,pageNo);
 	}
+
 
 }

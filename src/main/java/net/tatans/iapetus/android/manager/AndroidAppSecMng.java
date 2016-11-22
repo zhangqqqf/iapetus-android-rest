@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.SumDownLoadApp;
 
 
 public interface AndroidAppSecMng{
@@ -17,7 +18,7 @@ public interface AndroidAppSecMng{
 	public AndroidAppSec update(AndroidAppSec bean);
 
 	public boolean save(AndroidAppSec bean);
-
+	public int updateSumDownloadApp(SumDownLoadApp bean);
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
 
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
