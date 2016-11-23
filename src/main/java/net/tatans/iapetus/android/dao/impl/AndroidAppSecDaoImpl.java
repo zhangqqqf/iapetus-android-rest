@@ -75,10 +75,9 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		return list;
 	}
 	@Override
-	public int updateSumDownloadApp(SumDownLoadApp bean) {
-		
+	public int updateSumDownloadApp(String packageName) {
 		Transaction trans=getOpenSession().beginTransaction();
-		String hql="update SumDownLoadApp tt set tt.count=tt.count+1 where tt.packageName='"+bean.getPackageName()+"'";
+		String hql="update AndroidAppSec tt set tt.down=tt.down+1 where tt.packageName='"+packageName+"'";
 		Query queryupdate=getOpenSession().createQuery(hql);
 		int ret=queryupdate.executeUpdate();
 		trans.commit();
@@ -128,5 +127,12 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		}
 		System.out.println(1);
 		return "false";
+	}
+
+	@Override
+	public List<AndroidAppSec> findAppsBySumCount() {
+		Finder finder=Finder.create("from AndroidAppSec bean order by bean.down");
+		List<AndroidAppSec> list = find(finder);
+		return list;
 	}
 }

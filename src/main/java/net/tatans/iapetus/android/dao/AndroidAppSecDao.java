@@ -18,10 +18,12 @@ public interface AndroidAppSecDao {
 
 	public boolean save(AndroidAppSec bean);
 	
-	public int updateSumDownloadApp(SumDownLoadApp bean);
+	public int updateSumDownloadApp(String packageName);
 	
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
-
+	
+	public List<AndroidAppSec> findAppsBySumCount();
+	
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
 
 	public Pagination findclassifyAppsByChannelName(String channelName, int pageNo, String mobileModel);

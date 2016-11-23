@@ -1,8 +1,11 @@
 package net.tatans.iapetus.android.rest.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
-import net.tatans.iapetus.android.entity.AndroidApp;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
 import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
@@ -26,6 +28,7 @@ import net.tatans.iapetus.android.rest.util.StringUtil;
 @Controller
 @RequestMapping("/findappsec")
 public class FindAppSec {
+	
 	/**
 	 * 获取所有app信息(用于自动更新)
 	 * @param packagename
@@ -68,15 +71,45 @@ public class FindAppSec {
 		}
 	 	return StringUtil.toResponseStr(true, "\"pageNo\":"+pageNo+",\"pageCount\":"+page.getTotalPage(), json);
 	}
+	/**
+	 * 统计下载数量
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/sumDownloadCount.do")
 	public String sumDownloadCount(String packagename,
 			HttpServletRequest request) {
-		SumDownLoadApp sum = new SumDownLoadApp();
-		sum.setId(2);
-		sum.setPackageName("aaa");
-		sum.setCount(1);
-		int intCount=mng.updateSumDownloadApp(sum);
+		int intCount=mng.updateSumDownloadApp(packagename);
+		if(intCount==1){
+			return true+"";
+		}else{
+			return false+"";
+		}
+	}
+	
+	/**
+	 * 下载应用
+	 * @throws IOException 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/downLoadApp.do")
+	public String DownloadApp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect(request.getParameter("url"));
+		int intCount=mng.updateSumDownloadApp(request.getParameter("packageName"));
+		if(intCount==1){
+			return true+"";
+		}else{
+			return false+"";
+		}
+	}
+	/**
+	 * 下载排行版
+	 * @throws IOException 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/topChartsApp.do")
+	public String topChartsApp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect(request.getParameter("url"));
+		int intCount=mng.updateSumDownloadApp(request.getParameter("packageName"));
 		if(intCount==1){
 			return true+"";
 		}else{

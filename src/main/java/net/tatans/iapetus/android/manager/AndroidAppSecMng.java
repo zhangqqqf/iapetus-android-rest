@@ -18,7 +18,11 @@ public interface AndroidAppSecMng{
 	public AndroidAppSec update(AndroidAppSec bean);
 
 	public boolean save(AndroidAppSec bean);
-	public int updateSumDownloadApp(SumDownLoadApp bean);
+	
+	public int updateSumDownloadApp(String packageName);
+	
+	public List<AndroidAppSec> findAppsBySumCount();
+	
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
 
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);

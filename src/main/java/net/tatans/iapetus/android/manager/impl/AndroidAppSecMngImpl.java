@@ -67,9 +67,9 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 		return dao.findNewsApps(mobileModel);
 	}
 	@Override
-	public int updateSumDownloadApp(SumDownLoadApp bean) {
+	public int updateSumDownloadApp(String packageName) {
 		// TODO Auto-generated method stub
-		return dao.updateSumDownloadApp(bean);
+		return dao.updateSumDownloadApp(packageName);
 	}
 	@Override
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel) {
@@ -98,6 +98,12 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	@Override
 	public String validaApp(String imei, String sign) {
 		return dao.validaApp(imei,sign);
+	}
+
+	@Override
+	public List<AndroidAppSec> findAppsBySumCount() {
+		// TODO Auto-generated method stub
+		return dao.findAppsBySumCount();
 	}
 
 }

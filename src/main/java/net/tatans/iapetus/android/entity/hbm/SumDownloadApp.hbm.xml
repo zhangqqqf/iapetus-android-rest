@@ -1,6 +1,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="net.tatans.iapetus.android.entity">
-	<class name="SumDownLoadApp" table="tt_sum_download_app">
+	<class name="SumDownLoadApp" table="tt_sum_download_app" dynamic-update="true">
 		<meta attribute="sync-DAO">false</meta>
 		<cache usage="read-write"/>
 		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
