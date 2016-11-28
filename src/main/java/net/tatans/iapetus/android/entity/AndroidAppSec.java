@@ -11,8 +11,8 @@ public class AndroidAppSec extends BaseAndroidAppSec{
 
 	public AndroidAppSec(Integer id,String appName, String decription,
 			String packageName, Integer versionCode, String versionName,
-			AndroidChannelSec channel,String tag, Integer weight, String mobileModel) {
-		super(id, appName, decription, packageName, versionCode, versionName, channel, tag, weight, mobileModel);
+			AndroidChannelSec channel,String tag, Integer weight, String mobileModel,Integer dowm) {
+		super(id, appName, decription, packageName, versionCode, versionName, channel, tag, weight, mobileModel,dowm);
 	}
 
 	

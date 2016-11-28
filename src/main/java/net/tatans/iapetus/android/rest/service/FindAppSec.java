@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 import net.tatans.iapetus.android.rest.util.JsonMapper;
 import net.tatans.iapetus.android.rest.util.StringUtil;
@@ -47,7 +46,7 @@ public class FindAppSec {
 		}
 		String json=null;
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","iconUrl","url","packageName","size"});
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +64,7 @@ public class FindAppSec {
 			return StringUtil.toResponseStr(false, "\"pageNo\":"+pageNo+",\"pageCount\":"+null, null);
 		}
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","iconUrl","decription","url","packageName","size"});
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,9 +91,12 @@ public class FindAppSec {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/downLoadApp.do")
-	public String DownloadApp(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect(request.getParameter("url"));
-		int intCount=mng.updateSumDownloadApp(request.getParameter("packageName"));
+	public String downloadApp(String packageName,String versionName,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
+		System.out.println("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
+		int intCount=mng.updateSumDownloadApp(packageName);
+//		System.out.println();
+		//int intCount=0;
 		if(intCount==1){
 			return true+"";
 		}else{
@@ -107,14 +109,21 @@ public class FindAppSec {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/topChartsApp.do")
-	public String topChartsApp(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect(request.getParameter("url"));
-		int intCount=mng.updateSumDownloadApp(request.getParameter("packageName"));
-		if(intCount==1){
-			return true+"";
-		}else{
-			return false+"";
+	public String topChartsApp(String mobileModel,@RequestParam(defaultValue="1",required=false)Integer pageNo,
+			HttpServletRequest request)  {
+		String  tag=RequestUtils.getQueryParam(request, "tag");
+		Pagination page=mng.findAppsBySumCount(tag, pageNo, mobileModel);
+		List<AndroidAppSec> list=(List<AndroidAppSec>) page.getList();
+		String json=null;
+		if(list.size()==0){
+			return StringUtil.toResponseStr(false, "\"pageNo\":"+pageNo+",\"pageCount\":"+null, null);
 		}
+		try {
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size","down"});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	 	return StringUtil.toResponseStr(true, "\"pageNo\":"+pageNo+",\"pageCount\":"+page.getTotalPage(), json);
 	}
 	/**
 	 * 根据标签名查询APP
@@ -129,13 +138,14 @@ public class FindAppSec {
 			HttpServletRequest request) {
 		String  tag=RequestUtils.getQueryParam(request, "tag");
 		Pagination page=mng.findAppsByTag(tag, pageNo,mobileModel);
+		@SuppressWarnings("unchecked")
 		List<AndroidAppSec> list=(List<AndroidAppSec>) page.getList();
 		String json=null;
 		if(list.size()==0){
 			return StringUtil.toResponseStr(false, "\"pageNo\":"+pageNo+",\"pageCount\":"+null, null);
 		}
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","iconUrl","decription","url","packageName","size"});
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,13 +172,14 @@ public class FindAppSec {
 				return StringUtil.toResponseStr(false, "\"pageNo\":"+pageNo+",\"pageCount\":"+null, null);
 			}
 		}
+		@SuppressWarnings("unchecked")
 		List<AndroidAppSec> list=(List<AndroidAppSec>) page.getList();
 		String json=null;
 		if(list.size()==0){
 			return StringUtil.toResponseStr(false, "\"pageNo\":"+pageNo+",\"pageCount\":"+null, null);
 		}
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","iconUrl","decription","url","packageName","size"});
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -188,7 +199,7 @@ public class FindAppSec {
 			return StringUtil.toResponseStr(false, "\"pageCount\":"+null, null);
 		}
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","iconUrl","decription","url","packageName","size"});
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d{HH:mm:ss.SSS} %-5level %logger{80} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	<!-- 日志文件,保存到文件，周期30天-->  
+	 <appender name="Log" class="ch.qos.logback.core.rolling.RollingFileAppender">   
+	  <Encoding>UTF-8</Encoding> 
+	  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	   <fileNamePattern>/iapetus-LOGS/android/log/all/%d{yyyy-MM-dd}.log</fileNamePattern>   
+	   <maxHistory>30</maxHistory>   
+	  </rollingPolicy>   
+	  <encoder>   
+	   <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{40} - %msg%n</pattern>   
+	  </encoder>   
+	  <!--日志文件最大的大小.超过大小会重新生成一个文件，文件名是命名规则后面+d-->
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <MaxFileSize>10MB</MaxFileSize>
+       </triggeringPolicy>
+	 </appender>
+	 
+	 
+	<root>
+		<!-- 错误级别 -->
+		<level value="info" />
+		<!-- 打印控制台 -->
+		<appender-ref ref="STDOUT" />
+		<!-- 保存文件 -->
+ 		<appender-ref ref="Log" /> 
+	</root>
+</configuration>
+

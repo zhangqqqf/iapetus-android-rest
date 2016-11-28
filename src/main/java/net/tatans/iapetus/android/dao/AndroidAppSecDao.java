@@ -22,7 +22,7 @@ public interface AndroidAppSecDao {
 	
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
 	
-	public List<AndroidAppSec> findAppsBySumCount();
+	public Pagination findAppsBySumCount(String tag,int pageNo, String mobileModel);
 	
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
 

@@ -32,7 +32,7 @@ public class APKService {
 		}
 		String json=null;
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","iconUrl","url","packageName","size"});
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","iconUrl","url","packageName","size","down"});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

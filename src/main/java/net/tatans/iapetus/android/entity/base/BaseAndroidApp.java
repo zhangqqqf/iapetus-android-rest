@@ -182,7 +182,7 @@ public abstract class BaseAndroidApp implements Serializable {
 
 	public BaseAndroidApp(Integer id, String appName, String decription,
 			String packageName, Integer versionCode, String versionName,
-			AndroidChannel channel, String tag, Integer weight) {
+			AndroidChannel channel, String tag, Integer weight,Integer down) {
 		super();
 		this.id = id;
 		this.appName = appName;
@@ -193,6 +193,7 @@ public abstract class BaseAndroidApp implements Serializable {
 		this.channel = channel;
 		this.tag = tag;
 		this.weight = weight;
+		this.down=down;
 	}
 
 	public BaseAndroidApp() {

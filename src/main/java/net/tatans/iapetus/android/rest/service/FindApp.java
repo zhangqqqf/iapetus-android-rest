@@ -51,6 +51,7 @@ public class FindApp {
 	@RequestMapping(value = "/appclassifytag.do")
 	public String showTagApps(@RequestParam(defaultValue="1",required=false)Integer pageNo,
 			HttpServletRequest request) {
+		System.out.println("----------------");
 		String  tag=RequestUtils.getQueryParam(request, "tag");
 		Pagination page=mng.findAppsByTag(tag, pageNo);
 		List<AndroidApp> list=(List<AndroidApp>) page.getList();

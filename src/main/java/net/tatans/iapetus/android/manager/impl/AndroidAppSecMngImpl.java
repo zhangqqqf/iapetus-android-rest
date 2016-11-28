@@ -101,9 +101,9 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	}
 
 	@Override
-	public List<AndroidAppSec> findAppsBySumCount() {
+	public Pagination findAppsBySumCount(String tag, Integer pageNo, String mobileModel) {
 		// TODO Auto-generated method stub
-		return dao.findAppsBySumCount();
+		return dao.findAppsBySumCount(tag,pageNo,mobileModel);
 	}
 
 }

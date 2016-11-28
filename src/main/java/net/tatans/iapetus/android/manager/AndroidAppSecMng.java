@@ -21,8 +21,6 @@ public interface AndroidAppSecMng{
 	
 	public int updateSumDownloadApp(String packageName);
 	
-	public List<AndroidAppSec> findAppsBySumCount();
-	
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
 
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
@@ -34,6 +32,8 @@ public interface AndroidAppSecMng{
 	public Pagination findSpecifyApps(String appName, String mobileModel);
 
 	public Pagination findAppsByTag(String tag, Integer pageNo, String mobileModel);
+	
+	public Pagination findAppsBySumCount(String tag, Integer pageNo, String mobileModel);
 
 	public String validaApp(String imei, String sign);
 }

@@ -9,8 +9,8 @@ public class AndroidApp extends BaseAndroidApp{
 
 	public AndroidApp(Integer id,String appName, String decription,
 			String packageName, Integer versionCode, String versionName,
-			AndroidChannel channel,String tag, Integer weight) {
-		super(id, appName, decription, packageName, versionCode, versionName, channel,tag, weight);
+			AndroidChannel channel,String tag, Integer weight,Integer dowm) {
+		super(id, appName, decription, packageName, versionCode, versionName, channel,tag, weight,dowm);
 	}
 
 	

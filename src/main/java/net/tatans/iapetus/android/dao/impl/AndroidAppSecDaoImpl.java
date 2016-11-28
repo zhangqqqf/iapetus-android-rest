@@ -10,7 +10,6 @@ import net.tatans.android.common.hibernate3.HibernateBaseDao;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.rest.util.Constans;
 
 public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Integer> implements AndroidAppSecDao {
@@ -130,9 +129,8 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 	}
 
 	@Override
-	public List<AndroidAppSec> findAppsBySumCount() {
-		Finder finder=Finder.create("from AndroidAppSec bean order by bean.down");
-		List<AndroidAppSec> list = find(finder);
-		return list;
+	public Pagination findAppsBySumCount(String tag,int pageNo, String mobileModel){
+		Finder f=Finder.create("from AndroidAppSec bean order by down DESC");
+		return find(f, pageNo, countQueryResult(f)+1);
 	}
 }

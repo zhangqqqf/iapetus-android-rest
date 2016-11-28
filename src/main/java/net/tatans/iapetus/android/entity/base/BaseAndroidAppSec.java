@@ -184,7 +184,7 @@ public abstract class BaseAndroidAppSec implements Serializable {
 
 	public BaseAndroidAppSec(Integer id, String appName, String decription,
 			String packageName, Integer versionCode, String versionName,
-			AndroidChannelSec channel, String tag, Integer weight, String mobileModel) {
+			AndroidChannelSec channel, String tag, Integer weight, String mobileModel,Integer down) {
 		super();
 		this.id = id;
 		this.appName = appName;
@@ -196,6 +196,7 @@ public abstract class BaseAndroidAppSec implements Serializable {
 		this.tag = tag;
 		this.weight = weight;
 		this.mobileModel = mobileModel;
+		this.down = down;
 	}
 
 	public BaseAndroidAppSec() {
