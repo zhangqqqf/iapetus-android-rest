@@ -73,6 +73,7 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		List<AndroidAppSec> list = find(finder);
 		return list;
 	}
+	
 	@Override
 	public int updateSumDownloadApp(String packageName) {
 		Transaction trans=getOpenSession().beginTransaction();
@@ -82,6 +83,7 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		trans.commit();
 		return ret;
 	}
+	
 	@Override
 	public Pagination findclassifyAppsByChannelName(String channelName, int pageNo, String mobileModel) {
 		Finder f=Finder.create("from AndroidAppSec bean where bean.channel.channelName=:channelName and ( bean.mobileModel='all' or bean.mobileModel=:mobileModel ) order by weight desc ");
