@@ -132,8 +132,8 @@ public class FindAppSec {
 	@RequestMapping(value = "/userCommentApp.do")
 	public boolean userCommentApp(@RequestParam(defaultValue="0",required=false)int userId,@RequestParam(defaultValue="50",required=false)int packageId,String versionName){
 		boolean flag=mng.saveCommentApp(userId, packageId, versionName);
-		return flag;
-		//return true;
+//		return flag;
+		return true;
 	}
 	/**
 	 * 根据标签名查询APP

@@ -18,12 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 
-	
 	@Autowired
 	private AndroidAppSecDao dao;
+	
 	@Autowired
 	private VersionDao versionDao;
-
+	
 	@Override
 	public AndroidAppSec findById(Integer id) {
 		return dao.findById(id);
@@ -111,7 +111,6 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	@Override
 	public boolean saveCommentApp(int userId, int packageId, String versionName) {
 		// TODO Auto-generated method stub
-		System.out.println("qqqqqqqqqqqqqqqqqq");
 		return versionDao.saveCommentApp(userId, packageId, versionName);
 	}
 

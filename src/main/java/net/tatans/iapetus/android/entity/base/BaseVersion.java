@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import net.tatans.iapetus.android.entity.User;
 
 @JsonFilter("BaseAnroidVersion")
-public abstract class BaseAnroidVersion implements Serializable {
+public abstract class BaseVersion implements Serializable {
 
-	public BaseAnroidVersion() {
+	public BaseVersion() {
 		super();
 	}
 	
@@ -18,7 +18,7 @@ public abstract class BaseAnroidVersion implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String versionCode;
+	private Integer versionCode;
 	private String versionName ;
 	private Integer gradle;
 	private  BaseAndroidAppSec baseAndroidAppSec;
@@ -29,10 +29,10 @@ public abstract class BaseAnroidVersion implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getVersionCode() {
+	public Integer getVersionCode() {
 		return versionCode;
 	}
-	public void setVersionCode(String versionCode) {
+	public void setVersionCode(Integer versionCode) {
 		this.versionCode = versionCode;
 	}
 	public String getVersionName() {
@@ -83,7 +83,7 @@ public abstract class BaseAnroidVersion implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BaseAnroidVersion other = (BaseAnroidVersion) obj;
+		BaseVersion other = (BaseVersion) obj;
 		if (baseAndroidAppSec == null) {
 			if (other.baseAndroidAppSec != null)
 				return false;
@@ -122,7 +122,7 @@ public abstract class BaseAnroidVersion implements Serializable {
 				+ ", userId="  + ", gradle=" + gradle + ", baseAndroidAppSec=" + baseAndroidAppSec
 				+ ", baseUser=" + baseUsers + "]";
 	}
-	public BaseAnroidVersion(Integer id, String versionCode, String versionName, Integer gradle) {
+	public BaseVersion(Integer id, Integer versionCode, String versionName, Integer gradle) {
 		super();
 		this.id = id;
 		this.versionCode = versionCode;

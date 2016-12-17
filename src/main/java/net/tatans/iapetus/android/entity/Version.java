@@ -1,8 +1,8 @@
 package net.tatans.iapetus.android.entity;
 
-import net.tatans.iapetus.android.entity.base.BaseAnroidVersion;
+import net.tatans.iapetus.android.entity.base.BaseVersion;
 
-public class Version extends BaseAnroidVersion{
+public class Version extends BaseVersion{
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class Version extends BaseAnroidVersion{
 		super();
 	}
 
-	public Version(Integer id, String versionCode, String versionName, Integer gradle) {
+	public Version(Integer id, Integer versionCode, String versionName, Integer gradle) {
 		super(id, versionCode, versionName, gradle);
 	}
 

@@ -21,6 +21,7 @@
 	
 	<bean id="androidAppSecMng" class="net.tatans.iapetus.android.manager.impl.AndroidAppSecMngImpl"/>
 	<bean id="androidAppSecDao" class="net.tatans.iapetus.android.dao.impl.AndroidAppSecDaoImpl"/>
+	<bean id="VersionDao" class="net.tatans.iapetus.android.dao.impl.VersionDaoImpl"/>
 	
 	<bean id="androidMobileIDMng" class="net.tatans.android.mark.manager.impl.AndroidMobileIDMngImpl"/>
 	<bean id="androidMobileDao" class="net.tatans.android.mark.dao.impl.AndroidMobileDaoImpl"/>
@@ -30,5 +31,6 @@
 	
 	<bean id="androidHelpMng" class="net.tatans.android.help.manager.impl.AndroidHelpMngImpl"/>
 	<bean id="androidHelpDao" class="net.tatans.android.help.dao.impl.AndroidHelpDaoImpl"/>
+	
 
 </beans> 

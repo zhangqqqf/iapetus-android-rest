@@ -40,13 +40,13 @@ public class VersionDaoImpl extends HibernateBaseDao<Version, Integer> implement
 
 	@Override
 	public boolean saveCommentApp(int userId,int packageId,String versionName) {
-//		Finder finder=Finder.create("from Version");
+		Finder finder=Finder.create("from Version");
 //		Finder finder=Finder.create("from Version bean where bean.versionName=:versionName and bean.packageId=:packageId");
 //		finder.setParam("versionName",versionName);
 //		finder.setParam("packageId",packageId);
 		System.out.println("---------------");
-//		List<Version> list=find(finder);
-//		System.out.println("-----"+list.get(0).getId());
+		List<Version> list=find(finder);
+		System.out.println("-----"+list.get(0).getId());
 //		if(list.size()==0){
 //			//getSession().save(bean);
 //			return true;
