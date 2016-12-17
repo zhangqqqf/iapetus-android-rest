@@ -56,7 +56,6 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 			return false;
 		}
 	}
-
 	@Override
 	public List<AndroidAppSec> findNewsApps(String mobileModel) {
 		Finder finder=Finder.create("from AndroidAppSec bean where ( bean.mobileModel='all' or bean.mobileModel=:mobileModel ) group by bean.packageName order by weight desc ");

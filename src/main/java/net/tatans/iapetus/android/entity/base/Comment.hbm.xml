@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.iapetus.android.entity">
+	<class name="Comment" table="tt_app_comment" dynamic-update="true">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="content" column="content" type="string"/>
+		<property name="user" column="user" type="string"/>
+		<property name="contentTime" column="contentTime" type="string"/>
+		<property name="thumbsUp" column="thumbsUp" type="integer"/>
+		<many-to-one name="baseUser" column="userId" class="User" fetch="select" />  
+		<many-to-one name="baseAnroidVersion" column="versionId" class="Version" fetch="select" />  
+	</class>
+</hibernate-mapping>

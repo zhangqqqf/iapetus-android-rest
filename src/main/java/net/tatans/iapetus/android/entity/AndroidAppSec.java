@@ -5,6 +5,11 @@ import net.tatans.iapetus.android.entity.AndroidChannelSec;
 
 
 public class AndroidAppSec extends BaseAndroidAppSec{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public AndroidAppSec() {
 		super();
 	}
@@ -14,6 +19,4 @@ public class AndroidAppSec extends BaseAndroidAppSec{
 			AndroidChannelSec channel,String tag, Integer weight, String mobileModel,Integer dowm) {
 		super(id, appName, decription, packageName, versionCode, versionName, channel, tag, weight, mobileModel,dowm);
 	}
-
-	
 }

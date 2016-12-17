@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.iapetus.android.entity">
+	<class name="Version" table="tt_app_version" dynamic-update="true">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="versionCode" column="versionCode" type="integer"/>
+		<property name="versionName" column="versionName" type="string"/>
+		<property name="gradle" column="gradle" type="integer"/>
+		<!-- <many-to-one name="baseAndroidAppSec" column="packageId" class="AndroidAppSec" not-null="false"/> -->
+		<!-- <many-to-one name="baseAndroidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
+		<many-to-one name="baseUsers" column="usersId" class="User" fetch="select" cascade="save-update"/>  -->
+	</class>
+</hibernate-mapping>

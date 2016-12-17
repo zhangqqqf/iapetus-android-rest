@@ -5,7 +5,6 @@ import java.util.List;
 import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 
 public interface AndroidAppSecDao {
 	public AndroidAppSec findById(Integer id);
@@ -35,4 +34,5 @@ public interface AndroidAppSecDao {
 	public Pagination findAppsByTag(String tag,int pageNo, String mobileModel);
 
 	public String validaApp(String imei, String sign);
+	
 }

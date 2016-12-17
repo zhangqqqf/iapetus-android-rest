@@ -36,4 +36,6 @@ public interface AndroidAppSecMng{
 	public Pagination findAppsBySumCount(String tag, Integer pageNo, String mobileModel);
 
 	public String validaApp(String imei, String sign);
+	
+	public boolean saveCommentApp(int userId,int packageName,String versionName);
 }

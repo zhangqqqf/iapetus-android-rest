@@ -6,8 +6,8 @@ import java.util.List;
 import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
+import net.tatans.iapetus.android.dao.VersionDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,8 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	
 	@Autowired
 	private AndroidAppSecDao dao;
+	@Autowired
+	private VersionDao versionDao;
 
 	@Override
 	public AndroidAppSec findById(Integer id) {
@@ -104,6 +106,13 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	public Pagination findAppsBySumCount(String tag, Integer pageNo, String mobileModel) {
 		// TODO Auto-generated method stub
 		return dao.findAppsBySumCount(tag,pageNo,mobileModel);
+	}
+
+	@Override
+	public boolean saveCommentApp(int userId, int packageId, String versionName) {
+		// TODO Auto-generated method stub
+		System.out.println("qqqqqqqqqqqqqqqqqq");
+		return versionDao.saveCommentApp(userId, packageId, versionName);
 	}
 
 }

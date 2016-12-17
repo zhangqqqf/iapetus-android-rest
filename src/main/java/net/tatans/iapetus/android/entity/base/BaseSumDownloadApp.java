@@ -32,9 +32,11 @@ public abstract class BaseSumDownloadApp implements Serializable {
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
 	}
+	
 	public BaseSumDownloadApp() {
 		super();
 	}
+	
 	public BaseSumDownloadApp(Integer id, Integer count, String packageName) {
 		super();
 		this.id = id;

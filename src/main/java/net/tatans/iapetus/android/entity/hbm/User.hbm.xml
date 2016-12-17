@@ -1,0 +1,16 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="net.tatans.iapetus.android.entity">
+	<class name="User" table="tt_app_user" dynamic-update="true">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
+		<property name="userName" column="userName" type="string"/>
+		<property name="password" column="password" type="string"/>
+		<property name="phoneNumber" column="phoneNumber" type="string"/>
+		<property name="enabled" column="enabled" type="string"/>
+		<set name="version" cascade="save-update">
+            <key column="id"></key>
+            <one-to-many class="User"/>
+        </set>
+	</class>
+</hibernate-mapping>
