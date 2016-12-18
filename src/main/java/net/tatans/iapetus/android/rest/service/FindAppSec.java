@@ -91,7 +91,7 @@ public class FindAppSec {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/downLoadApp.do")
-	public String downloadApp(String packageName,String versionName, HttpServletResponse response) throws IOException {
+	public String downloadApp(String packageName,String versionName,HttpServletResponse response) throws IOException {
 		response.sendRedirect("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
 		System.out.println("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
 		int intCount=mng.updateSumDownloadApp(packageName);
@@ -130,10 +130,10 @@ public class FindAppSec {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/userCommentApp.do")
-	public boolean userCommentApp(@RequestParam(defaultValue="0",required=false)int userId,@RequestParam(defaultValue="50",required=false)int packageId,String versionName){
-		boolean flag=mng.saveCommentApp(userId, packageId, versionName);
-//		return flag;
-		return true;
+	public boolean userCommentApp(String userName,@RequestParam(defaultValue="50",required=false)
+	int packageId,String versionName,String comment){
+		boolean flag=mng.saveCommentApp(userName, packageId, versionName,comment);
+		return flag;
 	}
 	/**
 	 * 根据标签名查询APP

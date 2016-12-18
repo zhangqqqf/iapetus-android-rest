@@ -7,8 +7,12 @@
 		<property name="versionCode" column="versionCode" type="integer"/>
 		<property name="versionName" column="versionName" type="string"/>
 		<property name="gradle" column="gradle" type="integer"/>
-		<!-- <many-to-one name="baseAndroidAppSec" column="packageId" class="AndroidAppSec" not-null="false"/> -->
-		<!-- <many-to-one name="baseAndroidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
+		<property name="packageId" column="packageId" type="integer"/>
+		<set name="comment" cascade="save-update">
+            <key column="id"></key>
+            <one-to-many class="Version"/>
+        </set>
+<!-- 	<many-to-one name="baseAndroidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
 		<many-to-one name="baseUsers" column="usersId" class="User" fetch="select" cascade="save-update"/>  -->
 	</class>
 </hibernate-mapping>

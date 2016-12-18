@@ -9,8 +9,8 @@ public class Comment extends BaseComment{
 		super();
 	}
 
-	public Comment(Integer id, String content, String contentTime, int thumbsUp) {
-		super(id, content, contentTime, thumbsUp);
+	public Comment(Integer id, String content,  int thumbsUp) {
+		super(id,content, thumbsUp);
 		// TODO Auto-generated constructor stub
 	}
 	

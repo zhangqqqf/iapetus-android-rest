@@ -12,5 +12,9 @@
             <key column="id"></key>
             <one-to-many class="User"/>
         </set>
+        <set name="comment" cascade="save-update">
+            <key column="id"></key>
+            <one-to-many class="User"/>
+        </set>
 	</class>
 </hibernate-mapping>

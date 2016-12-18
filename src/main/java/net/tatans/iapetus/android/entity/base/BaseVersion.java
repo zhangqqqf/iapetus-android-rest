@@ -1,10 +1,15 @@
 package net.tatans.iapetus.android.entity.base;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
+import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.User;
+import net.tatans.iapetus.android.entity.Version;
 
 @JsonFilter("BaseAnroidVersion")
 public abstract class BaseVersion implements Serializable {
@@ -21,8 +26,28 @@ public abstract class BaseVersion implements Serializable {
 	private Integer versionCode;
 	private String versionName ;
 	private Integer gradle;
-	private  BaseAndroidAppSec baseAndroidAppSec;
+	
+	private Integer packageId;
+	
+	private Set<Comment> comment = new HashSet<Comment>();
+	
+	private  AndroidAppSec baseAndroidAppSec;
+	
 	private  User baseUsers;
+	
+	public Set<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+	public Integer getPackageId() {
+		return packageId;
+	}
+	public void setPackageId(Integer packageId) {
+		this.packageId = packageId;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -51,7 +76,7 @@ public abstract class BaseVersion implements Serializable {
 	public BaseAndroidAppSec getBaseAndroidAppSec() {
 		return baseAndroidAppSec;
 	}
-	public void setBaseAndroidAppSec(BaseAndroidAppSec baseAndroidAppSec) {
+	public void setBaseAndroidAppSec(AndroidAppSec baseAndroidAppSec) {
 		this.baseAndroidAppSec = baseAndroidAppSec;
 	}
 	public User getBaseUsers() {

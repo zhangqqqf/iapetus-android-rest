@@ -37,5 +37,5 @@ public interface AndroidAppSecMng{
 
 	public String validaApp(String imei, String sign);
 	
-	public boolean saveCommentApp(int userId,int packageName,String versionName);
+	public boolean saveCommentApp(String userName,int packageName,String versionName,String comment);
 }

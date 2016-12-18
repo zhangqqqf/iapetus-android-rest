@@ -6,8 +6,12 @@ import java.util.List;
 import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
+import net.tatans.iapetus.android.dao.CommentDao;
+import net.tatans.iapetus.android.dao.UserDao;
 import net.tatans.iapetus.android.dao.VersionDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.User;
+import net.tatans.iapetus.android.entity.Version;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,12 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	
 	@Autowired
 	private VersionDao versionDao;
+	
+	@Autowired
+	private CommentDao commentDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	@Override
 	public AndroidAppSec findById(Integer id) {
@@ -109,9 +119,11 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	}
 
 	@Override
-	public boolean saveCommentApp(int userId, int packageId, String versionName) {
+	public boolean saveCommentApp(String userName,int packageId,String versionName,String comment) {
 		// TODO Auto-generated method stub
-		return versionDao.saveCommentApp(userId, packageId, versionName);
+		 Version version=versionDao.getVersionByPackageNameAndVersionName(packageId, versionName);
+		 User user =userDao.getUserByUserName(userName);
+		 return commentDao.saveCommentApp(user, version, comment);
 	}
 
 }

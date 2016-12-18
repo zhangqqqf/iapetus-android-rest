@@ -17,5 +17,9 @@
 		<property name="weight" column="weight" type="integer"/>
 		<property name="mobileModel" column="mobileModel" type="string"/>
 		<many-to-one name="channel" column="channel_id" class="AndroidChannelSec" not-null="false"/>
+		<set name="version" cascade="save-update">
+            <key column="id"></key>
+            <one-to-many class="AndroidAppSec"/>
+        </set>
 	</class>
 </hibernate-mapping>

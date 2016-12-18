@@ -1,10 +1,13 @@
 package net.tatans.iapetus.android.entity.base;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
 import net.tatans.iapetus.android.entity.AndroidChannelSec;
+import net.tatans.iapetus.android.entity.Version;
 
 @JsonFilter("BaseAndroidAppSec")
 public abstract class BaseAndroidAppSec implements Serializable {
@@ -29,6 +32,17 @@ public abstract class BaseAndroidAppSec implements Serializable {
 
 	//	many_to_one
 	private AndroidChannelSec channel;
+	
+	private Set<Version> version = new HashSet<Version>();
+	
+	public Set<Version> getVersion() {
+		return version;
+	}
+
+	public void setVersion(Set<Version> version) {
+		this.version = version;
+	}
+
 	//手机机型
 	private String mobileModel;
 

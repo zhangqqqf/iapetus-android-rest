@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
+import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.Version;
 
 @JsonFilter("BaseUser")
@@ -33,7 +34,16 @@ public abstract class BaseUser implements Serializable {
 	private String phoneNumber ;
 	private String enabled;
 	private Set<Version> version=  new HashSet<Version>();
+	private Set<Comment> comment=  new HashSet<Comment>();
 	
+	public Set<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+
 	public Set<Version> getVersion() {
 		return version;
 	}
