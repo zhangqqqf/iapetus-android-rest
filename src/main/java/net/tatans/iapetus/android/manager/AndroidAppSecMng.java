@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.SumDownLoadApp;
 
 
@@ -37,5 +38,7 @@ public interface AndroidAppSecMng{
 
 	public String validaApp(String imei, String sign);
 	
-	public boolean saveCommentApp(String userName,int packageName,String versionName,String comment);
+	public boolean saveCommentApp(String userName,int packageId,String versionName,String comment);
+	
+	public List<Comment> getUserCommentApp(int packageId,String versionName);
 }

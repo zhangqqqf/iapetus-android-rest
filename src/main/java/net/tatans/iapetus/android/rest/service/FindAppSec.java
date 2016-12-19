@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 import net.tatans.iapetus.android.rest.util.JsonMapper;
 import net.tatans.iapetus.android.rest.util.StringUtil;
@@ -129,11 +130,30 @@ public class FindAppSec {
 	 * @throws IOException 
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/userCommentApp.do")
-	public boolean userCommentApp(String userName,@RequestParam(defaultValue="50",required=false)
+	@RequestMapping(value = "/setUserCommentApp.do")
+	public boolean setUserCommentApp(String userName,@RequestParam(defaultValue="50",required=false)
 	int packageId,String versionName,String comment){
 		boolean flag=mng.saveCommentApp(userName, packageId, versionName,comment);
 		return flag;
+	}
+	/**
+	 * 获取用户评论列表
+	 * @throws IOException 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getUserCommentApp.do")
+	public String getUserCommentApp(int packageId,String versionName){
+		List<Comment> list= mng.getUserCommentApp(packageId,versionName);
+		String json=null;
+		if(list.size()==0){
+			return StringUtil.toResponseStr(false, null, null);
+		}
+		try {
+			json=jsonMapper.toJsonStr(list,new String[] {"id","content","contentTime","versionCode"});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	 	return StringUtil.toResponseStr(true,null, json);
 	}
 	/**
 	 * 根据标签名查询APP

@@ -1,6 +1,7 @@
 package net.tatans.iapetus.android.entity.base;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 
@@ -16,6 +17,7 @@ public abstract class BaseComment implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String content;
+	private Timestamp contentTime;
 	private User baseUser;
 	private int thumbsUp;
 	private Version baseAnroidVersion;
@@ -36,10 +38,12 @@ public abstract class BaseComment implements Serializable {
 		result = prime * result + ((baseAnroidVersion == null) ? 0 : baseAnroidVersion.hashCode());
 		result = prime * result + ((baseUser == null) ? 0 : baseUser.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((contentTime == null) ? 0 : contentTime.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + thumbsUp;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -63,6 +67,11 @@ public abstract class BaseComment implements Serializable {
 			if (other.content != null)
 				return false;
 		} else if (!content.equals(other.content))
+			return false;
+		if (contentTime == null) {
+			if (other.contentTime != null)
+				return false;
+		} else if (!contentTime.equals(other.contentTime))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -106,6 +115,21 @@ public abstract class BaseComment implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+	public Timestamp getContentTime() {
+		return contentTime;
+	}
+	public void setContentTime(Timestamp contentTime) {
+		this.contentTime = contentTime;
+	}
+	public BaseComment(Integer id, String content, Timestamp contentTime, User baseUser, int thumbsUp,
+			Version baseAnroidVersion) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.contentTime = contentTime;
+		this.baseUser = baseUser;
+		this.thumbsUp = thumbsUp;
+		this.baseAnroidVersion = baseAnroidVersion;
+	}
 	
 }

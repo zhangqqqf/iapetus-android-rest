@@ -10,6 +10,7 @@ import net.tatans.iapetus.android.dao.CommentDao;
 import net.tatans.iapetus.android.dao.UserDao;
 import net.tatans.iapetus.android.dao.VersionDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.User;
 import net.tatans.iapetus.android.entity.Version;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
@@ -124,6 +125,12 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 		 Version version=versionDao.getVersionByPackageNameAndVersionName(packageId, versionName);
 		 User user =userDao.getUserByUserName(userName);
 		 return commentDao.saveCommentApp(user, version, comment);
+	}
+
+	@Override
+	public List<Comment> getUserCommentApp(int packageId,String versionName) {
+		Version version=versionDao.getVersionByPackageNameAndVersionName(packageId, versionName);
+		return commentDao.getUserCommentApp(version);
 	}
 
 }
