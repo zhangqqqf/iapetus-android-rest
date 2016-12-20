@@ -16,7 +16,7 @@ public class Comment extends BaseComment{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(Integer id, String content, Timestamp contentTime, User baseUser, int thumbsUp,
+	public Comment(int id, String content, Timestamp contentTime, User baseUser, int thumbsUp,
 			Version baseAnroidVersion) {
 		super(id, content, contentTime, baseUser, thumbsUp, baseAnroidVersion);
 		// TODO Auto-generated constructor stub

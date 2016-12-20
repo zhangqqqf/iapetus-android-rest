@@ -25,17 +25,17 @@ public class CommentDaoImpl extends HibernateBaseDao<Comment, Integer> implement
 			return false;
 		}
 		Comment comments = new Comment();
-		comments.setBaseAnroidVersion(version);
-		comments.setBaseUser(user);
+		comments.setVersion(version);
+		comments.setUser(user);
 		comments.setContent(comment);
 		getSession().save(comments);
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Comment> getUserCommentApp(Version version) {
-		System.out.println("version:"+version.getId());
-		Finder finder=Finder.create("from Comment bean where bean.baseAnroidVersion.id=:versionId");
+		Finder finder=Finder.create("from Comment bean where bean.version.id=:versionId");
 		finder.setParam("versionId", version.getId());
 		return find(finder);
 	}

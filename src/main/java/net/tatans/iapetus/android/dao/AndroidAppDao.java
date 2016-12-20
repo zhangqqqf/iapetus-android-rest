@@ -5,7 +5,6 @@ import java.util.List;
 import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidApp;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 
 public interface AndroidAppDao {
 	public AndroidApp findById(Integer id);

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.tatans.iapetus.android.entity.User;
 import net.tatans.iapetus.android.entity.Version;
@@ -15,12 +16,12 @@ public abstract class BaseComment implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private int id;
 	private String content;
 	private Timestamp contentTime;
-	private User baseUser;
+	private User user;
 	private int thumbsUp;
-	private Version baseAnroidVersion;
+	private Version version;	
 	
 	public BaseComment(Integer id, String content, int thumbsUp) {
 		super();
@@ -35,11 +36,11 @@ public abstract class BaseComment implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((baseAnroidVersion == null) ? 0 : baseAnroidVersion.hashCode());
-		result = prime * result + ((baseUser == null) ? 0 : baseUser.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((contentTime == null) ? 0 : contentTime.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + id;
 		result = prime * result + thumbsUp;
 		return result;
 	}
@@ -53,15 +54,15 @@ public abstract class BaseComment implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BaseComment other = (BaseComment) obj;
-		if (baseAnroidVersion == null) {
-			if (other.baseAnroidVersion != null)
+		if (version == null) {
+			if (other.version != null)
 				return false;
-		} else if (!baseAnroidVersion.equals(other.baseAnroidVersion))
+		} else if (!version.equals(other.version))
 			return false;
-		if (baseUser == null) {
-			if (other.baseUser != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!baseUser.equals(other.baseUser))
+		} else if (!user.equals(other.user))
 			return false;
 		if (content == null) {
 			if (other.content != null)
@@ -73,16 +74,13 @@ public abstract class BaseComment implements Serializable {
 				return false;
 		} else if (!contentTime.equals(other.contentTime))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (id != other.id)
 			return false;
 		if (thumbsUp != other.thumbsUp)
 			return false;
 		return true;
 	}
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 	public void setId(Integer id) {
@@ -94,23 +92,17 @@ public abstract class BaseComment implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public BaseUser getBaseUser() {
-		return baseUser;
+	public User getUser() {
+		return user;
 	}
-	public void setBaseUser(User baseUser) {
-		this.baseUser = baseUser;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public int getThumbsUp() {
 		return thumbsUp;
 	}
 	public void setThumbsUp(int thumbsUp) {
 		this.thumbsUp = thumbsUp;
-	}
-	public Version getBaseAnroidVersion() {
-		return baseAnroidVersion;
-	}
-	public void setBaseAnroidVersion(Version baseAnroidVersion) {
-		this.baseAnroidVersion = baseAnroidVersion;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -121,15 +113,27 @@ public abstract class BaseComment implements Serializable {
 	public void setContentTime(Timestamp contentTime) {
 		this.contentTime = contentTime;
 	}
-	public BaseComment(Integer id, String content, Timestamp contentTime, User baseUser, int thumbsUp,
-			Version baseAnroidVersion) {
+	public BaseComment(int id, String content, Timestamp contentTime, User user, int thumbsUp,
+			Version version) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.contentTime = contentTime;
-		this.baseUser = baseUser;
+		this.user = user;
 		this.thumbsUp = thumbsUp;
-		this.baseAnroidVersion = baseAnroidVersion;
+		this.version = version;
+	}
+	
+	public Version getVersion() {
+		return version;
+	}
+	
+	@JsonIgnore
+	public void setVersion(Version version) {
+		this.version = version;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

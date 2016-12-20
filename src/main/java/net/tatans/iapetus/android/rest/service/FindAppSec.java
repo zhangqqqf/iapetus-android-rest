@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
@@ -149,11 +151,11 @@ public class FindAppSec {
 			return StringUtil.toResponseStr(false, null, null);
 		}
 		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","content","contentTime","versionCode"});
+			json=jsonMapper.toJsonStr(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	 	return StringUtil.toResponseStr(true,null, json);
+	 	return json;
 	}
 	/**
 	 * 根据标签名查询APP

@@ -29,7 +29,7 @@ public class JsonMapper {
 
 	public JsonMapper() {
         // 设置默认日期格式
-        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         //提供其它默认设置
         objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,    false);

@@ -5,7 +5,6 @@ import java.util.List;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
 import net.tatans.iapetus.android.entity.Comment;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 
 
 public interface AndroidAppSecMng{

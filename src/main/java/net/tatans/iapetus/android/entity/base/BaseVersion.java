@@ -9,9 +9,8 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
 import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.User;
-import net.tatans.iapetus.android.entity.Version;
 
-@JsonFilter("BaseAnroidVersion")
+@JsonFilter("BaseVersion")
 public abstract class BaseVersion implements Serializable {
 
 	public BaseVersion() {
@@ -31,9 +30,9 @@ public abstract class BaseVersion implements Serializable {
 	
 	private Set<Comment> comment = new HashSet<Comment>();
 	
-	private  AndroidAppSec baseAndroidAppSec;
+	private  AndroidAppSec androidAppSec;
 	
-	private  User baseUsers;
+	private  User users;
 	
 	public Set<Comment> getComment() {
 		return comment;
@@ -73,17 +72,17 @@ public abstract class BaseVersion implements Serializable {
 	public void setGradle(Integer gradle) {
 		this.gradle = gradle;
 	}
-	public BaseAndroidAppSec getBaseAndroidAppSec() {
-		return baseAndroidAppSec;
+	public AndroidAppSec getandroidAppSec() {
+		return androidAppSec;
 	}
-	public void setBaseAndroidAppSec(AndroidAppSec baseAndroidAppSec) {
-		this.baseAndroidAppSec = baseAndroidAppSec;
+	public void setAndroidAppSec(AndroidAppSec androidAppSec) {
+		this.androidAppSec = androidAppSec;
 	}
-	public User getBaseUsers() {
-		return baseUsers;
+	public User getUsers() {
+		return users;
 	}
-	public void setBaseUsers(User baseUsers) {
-		this.baseUsers = baseUsers;
+	public void setUsers(User users) {
+		this.users = users;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -92,8 +91,8 @@ public abstract class BaseVersion implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((baseAndroidAppSec == null) ? 0 : baseAndroidAppSec.hashCode());
-		result = prime * result + ((baseUsers == null) ? 0 : baseUsers.hashCode());
+		result = prime * result + ((androidAppSec == null) ? 0 : androidAppSec.hashCode());
+		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		result = prime * result + ((gradle == null) ? 0 : gradle.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((versionCode == null) ? 0 : versionCode.hashCode());
@@ -109,15 +108,15 @@ public abstract class BaseVersion implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BaseVersion other = (BaseVersion) obj;
-		if (baseAndroidAppSec == null) {
-			if (other.baseAndroidAppSec != null)
+		if (androidAppSec == null) {
+			if (other.androidAppSec != null)
 				return false;
-		} else if (!baseAndroidAppSec.equals(other.baseAndroidAppSec))
+		} else if (!androidAppSec.equals(other.androidAppSec))
 			return false;
-		if (baseUsers == null) {
-			if (other.baseUsers != null)
+		if (users == null) {
+			if (other.users != null)
 				return false;
-		} else if (!baseUsers.equals(other.baseUsers))
+		} else if (!users.equals(other.users))
 			return false;
 		if (gradle == null) {
 			if (other.gradle != null)
@@ -143,9 +142,9 @@ public abstract class BaseVersion implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "BaseAnroidVersion [id=" + id + ", versionCode=" + versionCode + ", versionName=" + versionName
-				+ ", userId="  + ", gradle=" + gradle + ", baseAndroidAppSec=" + baseAndroidAppSec
-				+ ", baseUser=" + baseUsers + "]";
+		return "BaseVersion [id=" + id + ", versionCode=" + versionCode + ", versionName=" + versionName
+				+ ", userId="  + ", gradle=" + gradle + ", androidAppSec=" + androidAppSec
+				+ ", user=" + users + "]";
 	}
 	public BaseVersion(Integer id, Integer versionCode, String versionName, Integer gradle) {
 		super();

@@ -7,7 +7,6 @@ import net.tatans.android.common.hibernate3.HibernateBaseDao;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppDao;
 import net.tatans.iapetus.android.entity.AndroidApp;
-import net.tatans.iapetus.android.entity.SumDownLoadApp;
 import net.tatans.iapetus.android.rest.util.Constans;
 
 public class AndroidAppDaoImpl extends HibernateBaseDao<AndroidApp, Integer> implements AndroidAppDao {

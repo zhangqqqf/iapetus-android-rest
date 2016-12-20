@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.Version;
@@ -39,7 +41,7 @@ public abstract class BaseUser implements Serializable {
 	public Set<Comment> getComment() {
 		return comment;
 	}
-
+	@JsonIgnore
 	public void setComment(Set<Comment> comment) {
 		this.comment = comment;
 	}
@@ -47,7 +49,7 @@ public abstract class BaseUser implements Serializable {
 	public Set<Version> getVersion() {
 		return version;
 	}
-
+	@JsonIgnore
 	public void setVersion(Set<Version> version) {
 		this.version = version;
 	}

@@ -12,7 +12,7 @@
             <key column="id"></key>
             <one-to-many class="Version"/>
         </set>
-<!-- 	<many-to-one name="baseAndroidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
-		<many-to-one name="baseUsers" column="usersId" class="User" fetch="select" cascade="save-update"/>  -->
+<!-- 	<many-to-one name="androidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
+		<many-to-one name="users" column="usersId" class="User" fetch="select" cascade="save-update"/>  -->
 	</class>
 </hibernate-mapping>

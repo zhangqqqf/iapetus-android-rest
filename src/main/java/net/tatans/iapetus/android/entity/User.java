@@ -1,8 +1,12 @@
 package net.tatans.iapetus.android.entity;
 
 import net.tatans.iapetus.android.entity.base.BaseUser;
-
 public class User extends BaseUser {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public User() {
 		// TODO Auto-generated constructor stub

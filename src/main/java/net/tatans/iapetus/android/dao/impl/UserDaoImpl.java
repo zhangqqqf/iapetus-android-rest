@@ -30,7 +30,5 @@ public class UserDaoImpl extends HibernateBaseDao<User, Integer> implements User
 					return list.get(0);
 				}
 	}
-
-	
 	
 }
