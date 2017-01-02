@@ -31,6 +31,12 @@ public class VersionDaoImpl extends HibernateBaseDao<Version, Integer> implement
 		}
 	}
 
+	@Override
+	public void updateVersion(Version version) {
+		// TODO Auto-generated method stub
+		getSession().saveOrUpdate(version);
+	}
+
 	
 	
 }

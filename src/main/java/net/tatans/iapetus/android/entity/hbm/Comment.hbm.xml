@@ -6,6 +6,7 @@
 		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
 		<property name="content" column="content" type="string"/>
 		<property name="thumbsUp" column="thumbsUp" type="integer"/>
+		<property name="score" column="score" type="integer"/>
 		<property name="contentTime" column="contentTime" type="timestamp"/>
 		<many-to-one name="user" column="userId" class="User" fetch="select" not-found="ignore"/>  
 		<many-to-one name="version" column="versionId" class="Version" fetch="select" />  

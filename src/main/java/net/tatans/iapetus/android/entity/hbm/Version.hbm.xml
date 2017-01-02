@@ -6,7 +6,7 @@
 		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
 		<property name="versionCode" column="versionCode" type="integer"/>
 		<property name="versionName" column="versionName" type="string"/>
-		<property name="gradle" column="gradle" type="integer"/>
+		<property name="gradle" column="gradle" type="double"/>
 		<property name="packageId" column="packageId" type="integer"/>
 		<set name="comment" cascade="save-update">
             <key column="id"></key>

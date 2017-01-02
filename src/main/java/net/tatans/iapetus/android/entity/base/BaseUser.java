@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -80,7 +79,7 @@ public abstract class BaseUser implements Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

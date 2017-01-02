@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.tatans.iapetus.android.entity.AndroidAppSec;
 import net.tatans.iapetus.android.entity.Comment;
@@ -24,7 +25,7 @@ public abstract class BaseVersion implements Serializable {
 	private Integer id;
 	private Integer versionCode;
 	private String versionName ;
-	private Integer gradle;
+	private double gradle;
 	
 	private Integer packageId;
 	
@@ -33,7 +34,7 @@ public abstract class BaseVersion implements Serializable {
 	private  AndroidAppSec androidAppSec;
 	
 	private  User users;
-	
+	@JsonIgnore
 	public Set<Comment> getComment() {
 		return comment;
 	}
@@ -66,18 +67,20 @@ public abstract class BaseVersion implements Serializable {
 		this.versionName = versionName;
 	}
 	
-	public Integer getGradle() {
+	public double getGradle() {
 		return gradle;
 	}
-	public void setGradle(Integer gradle) {
+	public void setGradle(double gradle) {
 		this.gradle = gradle;
 	}
+	@JsonIgnore
 	public AndroidAppSec getandroidAppSec() {
 		return androidAppSec;
 	}
 	public void setAndroidAppSec(AndroidAppSec androidAppSec) {
 		this.androidAppSec = androidAppSec;
 	}
+	@JsonIgnore
 	public User getUsers() {
 		return users;
 	}
@@ -92,9 +95,13 @@ public abstract class BaseVersion implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((androidAppSec == null) ? 0 : androidAppSec.hashCode());
-		result = prime * result + ((users == null) ? 0 : users.hashCode());
-		result = prime * result + ((gradle == null) ? 0 : gradle.hashCode());
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(gradle);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((packageId == null) ? 0 : packageId.hashCode());
+		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		result = prime * result + ((versionCode == null) ? 0 : versionCode.hashCode());
 		result = prime * result + ((versionName == null) ? 0 : versionName.hashCode());
 		return result;
@@ -113,20 +120,27 @@ public abstract class BaseVersion implements Serializable {
 				return false;
 		} else if (!androidAppSec.equals(other.androidAppSec))
 			return false;
-		if (users == null) {
-			if (other.users != null)
+		if (comment == null) {
+			if (other.comment != null)
 				return false;
-		} else if (!users.equals(other.users))
+		} else if (!comment.equals(other.comment))
 			return false;
-		if (gradle == null) {
-			if (other.gradle != null)
-				return false;
-		} else if (!gradle.equals(other.gradle))
+		if (Double.doubleToLongBits(gradle) != Double.doubleToLongBits(other.gradle))
 			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (packageId == null) {
+			if (other.packageId != null)
+				return false;
+		} else if (!packageId.equals(other.packageId))
+			return false;
+		if (users == null) {
+			if (other.users != null)
+				return false;
+		} else if (!users.equals(other.users))
 			return false;
 		if (versionCode == null) {
 			if (other.versionCode != null)

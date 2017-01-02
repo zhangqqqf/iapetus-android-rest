@@ -1,6 +1,8 @@
 package net.tatans.iapetus.android.manager;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
@@ -37,7 +39,7 @@ public interface AndroidAppSecMng{
 
 	public String validaApp(String imei, String sign);
 	
-	public boolean saveCommentApp(String userName,int packageId,String versionName,String comment);
-	
+	public boolean saveCommentApp(String userName,int packageId,String versionName,String comment,int score);
+	public Map uploadApk(File apkFile) throws Exception;
 	public List<Comment> getUserCommentApp(int packageId,String versionName);
 }

@@ -9,6 +9,24 @@ public class Constans {
 	public static String accessKeySecret="Nkwju9KO61ahJAOK9NDirCJT3Gf5Bx";
 	public static String bucketName="tatans-bucket-other";//tatans-bucket-test tatans-bucket-other
 	public final static String ANDROID_MARK_PREFIX="appmark";
+	
+	public final static String ANDROID_bucketName="androd-app-store";//测试时候改成tatans-bucket-test tatans-bucket-other
+	public final static String ANDROID_APP_PREFIX="apksource";
+	public final static String ANDROID_IMGE_PREFIX="img";
+	
+	public static String apkPath(String packageName,String versionName,String suffix){
+		return ANDROID_APP_PREFIX+"/"+packageName+"/"+versionName+suffix;
+	}
+	public static String apkIconPath(String packageName,String versionName,String suffix){
+		return ANDROID_IMGE_PREFIX+"/"+packageName+"/"+versionName+suffix;
+	}
+	
+	public static String apkNewPath(String mobileModel,String packageName,String versionName,String suffix){
+		return ANDROID_APP_PREFIX+"/"+mobileModel+"/"+packageName+"/"+versionName+suffix;
+	}
+	public static String apkNewIconPath(String mobileModel,String packageName,String versionName,String suffix){
+		return ANDROID_IMGE_PREFIX+"/"+mobileModel+"/"+packageName+"/"+versionName+suffix;
+	}
 	/**
 	 * base模块到user模块获取用户相关信息
 	 */

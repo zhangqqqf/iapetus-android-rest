@@ -1,5 +1,6 @@
 package net.tatans.iapetus.android.rest.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
+import org.springframework.web.multipart.MultipartFile;
 
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
@@ -134,8 +136,8 @@ public class FindAppSec {
 	@ResponseBody
 	@RequestMapping(value = "/setUserCommentApp.do")
 	public boolean setUserCommentApp(String userName,@RequestParam(defaultValue="50",required=false)
-	int packageId,String versionName,String comment){
-		boolean flag=mng.saveCommentApp(userName, packageId, versionName,comment);
+	int packageId,String versionName,String comment,@RequestParam(defaultValue="5",required=false)int score){
+		boolean flag=mng.saveCommentApp(userName, packageId, versionName,comment,score);
 		return flag;
 	}
 	/**
@@ -237,7 +239,26 @@ public class FindAppSec {
 		}
 	 	return StringUtil.toResponseStr(true, "\"pageCount\":"+page.getTotalPage(), json);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
+	public String uploadApps(String packageName,String versionName,HttpServletRequest request,
+			@RequestParam(value = "file", required = true) MultipartFile file) throws Exception {
+		System.out.println("1111111111111");
+		if(file.isEmpty()){
+			return StringUtil.toResponseStr(false, null, null);
+		}
+		String path=request.getSession().getServletContext().getRealPath("/");
+		System.out.println("path:"+path+File.separator+file.getOriginalFilename());
+		File apkFile=new File(path+File.separator+file.getOriginalFilename());
+		if(apkFile.exists()){
+			apkFile.delete();
+		}
+		apkFile.mkdirs();
+		file.transferTo(apkFile);
+		mng.uploadApk(apkFile);
 	
+	 	return true+"";
+	}
 	@Autowired
 	private AndroidAppSecMng mng;
 	@Autowired

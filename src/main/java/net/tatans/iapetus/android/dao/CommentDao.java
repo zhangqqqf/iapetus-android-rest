@@ -8,7 +8,11 @@ import net.tatans.iapetus.android.entity.Version;
 
 public interface CommentDao {
 
-	public boolean saveCommentApp(User user,Version version,String comment);
+	public boolean saveCommentApp(User user,Version version,String comment,int score);
 	
 	public List<Comment> getUserCommentApp(Version version);
+	
+	public List<Comment> getCommentByPackageNameAndVersionName(int packageId,String versionName);
+	
+	public double getAvgScoreByVersionId(Version version);
 }
