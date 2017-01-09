@@ -10,10 +10,14 @@ import java.util.Map;
 import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
+import net.tatans.iapetus.android.dao.AndroidChannelDao;
+import net.tatans.iapetus.android.dao.AndroidChannelSecDao;
 import net.tatans.iapetus.android.dao.CommentDao;
 import net.tatans.iapetus.android.dao.UserDao;
 import net.tatans.iapetus.android.dao.VersionDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.AndroidChannel;
+import net.tatans.iapetus.android.entity.AndroidChannelSec;
 import net.tatans.iapetus.android.entity.AndroidOssUtil;
 import net.tatans.iapetus.android.entity.ApkInfo;
 import net.tatans.iapetus.android.entity.ApkUtil;
@@ -26,6 +30,7 @@ import net.tatans.iapetus.android.rest.util.Constans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 
@@ -35,6 +40,9 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 
 	@Autowired
 	private AndroidAppSecDao dao;
+	
+	@Autowired
+	private AndroidChannelSecDao androidChannelDao;
 	
 	@Autowired
 	private VersionDao versionDao;
@@ -49,7 +57,12 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	public AndroidAppSec findById(Integer id) {
 		return dao.findById(id);
 	}
-
+	
+	@Override
+	public AndroidChannelSec findByChannelId(Integer AndroidChannelId) {
+		// TODO Auto-generated method stub
+		return androidChannelDao.findById(AndroidChannelId);
+	}
 	@Override
 	public Pagination findBychannelId(Integer channelId,
 			Integer pageNo, Integer pageSize) {
@@ -140,34 +153,57 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	@Override
 	public List<Comment> getUserCommentApp(int packageId,String versionName) {
 		Version version=versionDao.getVersionByPackageNameAndVersionName(packageId, versionName);
-		
 		double gradle= commentDao.getAvgScoreByVersionId(version);
 		version.setGradle(gradle);
 		versionDao.updateVersion(version);
-		
 		return commentDao.getUserCommentApp(version);
 	}
 
 	@Override
-	public Map uploadApk(File apkFile) throws Exception {
-//		解析apk信息
-		Map map=new HashMap<>();
-		ApkInfo apkInfo=ApkUtil.apk(apkFile);
-		System.out.println(apkInfo);
-		String packageName=apkInfo.getPackageName();
-		String versionName=apkInfo.getVersionName();
+	public String uploadApk(MultipartFile apkFile) throws Exception {
 		ObjectMetadata objectMetadata =new ObjectMetadata();
-		objectMetadata.setContentLength(apkFile.length());
-		AndroidOssUtil.deleteFile(Constans.apkPath(packageName, versionName, ".apk"));
-		AndroidOssUtil.uploadInputStream(new FileInputStream(apkFile), objectMetadata, Constans.apkPath(packageName, versionName, ".apk"));
-		String url=AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk"));
-		System.out.println("url:"+url);
-		map.put("versionName", versionName);
-		map.put("packageName", packageName);
-		map.put("size", apkInfo.getSize());
-		map.put("versionCode", apkInfo.getVersionCode());
-		map.put("url",url);
-		return map;
+		objectMetadata.setContentLength(apkFile.getSize());
+		
+/*		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
+		System.out.println("flag："+flag);
+		if(flag==true)
+			return "该文件已经存在，请勿重复上传。";*/
+		//AndroidOssUtil.deleteFile(Constans.apkPath(packageName, versionName, ".apk"));
+		AndroidOssUtil.uploadInputStream(apkFile.getInputStream(), objectMetadata, Constans.apkPath("aa", "9.9", ".apk"));
+		
+		/*	String url=AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk"));
+		System.out.println("url:"+url);*/
+		return "";
+	}
+
+	@Override
+	public List<AndroidAppSec> findNewAppByPackageName(String packagename) {
+		// TODO Auto-generated method stub
+		return dao.findNewAppByPackageName(packagename);
+	}
+
+	@Override
+	public User getUserByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return userDao.getUserByUserName(userName);
+	}
+
+	@Override
+	public void updateVersion(Version version) {
+		// TODO Auto-generated method stub
+		versionDao.updateVersion(version);
+	}
+
+	@Override
+	public void saveOrUpdate(AndroidAppSec bean) {
+		// TODO Auto-generated method stub
+		dao.save(bean);
+	}
+
+	@Override
+	public String saveDifferentVersion(Version version) {
+		// TODO Auto-generated method stub
+		return versionDao.saveDifferentVersion(version);
 	}
 
 }

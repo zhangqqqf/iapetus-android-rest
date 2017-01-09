@@ -9,6 +9,7 @@
 		<property name="packageName" column="package_name" type="string"/>
 		<property name="versionCode" column="version_code" type="integer"/>
 		<property name="versionName" column="version_name" type="string"/>
+		<property name="signs" column="signs" type="string"/>
 		<property name="down" column="down" type="integer"/>
 		<property name="iconUrl" column="icon_url" type="string"/>
 		<property name="url" column="url" type="string"/>

@@ -4,15 +4,23 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.AndroidChannel;
+import net.tatans.iapetus.android.entity.AndroidChannelSec;
 import net.tatans.iapetus.android.entity.Comment;
+import net.tatans.iapetus.android.entity.User;
+import net.tatans.iapetus.android.entity.Version;
 
 
 public interface AndroidAppSecMng{
 
 	public AndroidAppSec findById(Integer id);
-
+	
+	public AndroidChannelSec findByChannelId(Integer AndroidChannelId); 
+	
 	public Pagination findBychannelId(Integer channelId, Integer pageNo, Integer pageSize);
 	
 	public List<AndroidAppSec> deleteByIds(Integer[] ids);
@@ -25,6 +33,8 @@ public interface AndroidAppSecMng{
 	
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
 
+	public List<AndroidAppSec> findNewAppByPackageName(String packagename);
+	
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
 
 	public Pagination findclassifyAppsByChannelName(String channelName, int pageNo, String mobileModel);
@@ -40,6 +50,17 @@ public interface AndroidAppSecMng{
 	public String validaApp(String imei, String sign);
 	
 	public boolean saveCommentApp(String userName,int packageId,String versionName,String comment,int score);
-	public Map uploadApk(File apkFile) throws Exception;
+	
+	public String uploadApk(MultipartFile apkFile) throws Exception;
+	
 	public List<Comment> getUserCommentApp(int packageId,String versionName);
+	
+	public User getUserByUserName(String userName);
+	
+	public void updateVersion(Version version);
+	
+	public void saveOrUpdate(AndroidAppSec bean);
+	
+	public String saveDifferentVersion(Version version);
+	
 }

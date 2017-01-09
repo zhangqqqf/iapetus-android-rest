@@ -25,6 +25,7 @@ public abstract class BaseAndroidAppSec implements Serializable {
 	private Integer down;
 	private String iconUrl;
 	private String url;
+	private String signs;
 	private String size;
 	//0 mean is hotAPP ;1 mean is not hotAPP
 	private String tag;
@@ -72,6 +73,14 @@ public abstract class BaseAndroidAppSec implements Serializable {
 	 */
 	public void setAppName(String appName) {
 		this.appName = appName;
+	}
+
+	public String getSigns() {
+		return signs;
+	}
+
+	public void setSigns(String signs) {
+		this.signs = signs;
 	}
 
 	/**

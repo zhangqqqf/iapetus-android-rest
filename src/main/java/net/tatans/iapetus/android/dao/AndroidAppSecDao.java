@@ -17,6 +17,8 @@ public interface AndroidAppSecDao {
 
 	public boolean save(AndroidAppSec bean);
 	
+	public void saveOrUpdate(AndroidAppSec bean);
+	
 	public int updateSumDownloadApp(String packageName);
 	
 	public List<AndroidAppSec> findNewsApps(String mobileModel);
@@ -24,6 +26,8 @@ public interface AndroidAppSecDao {
 	public Pagination findAppsBySumCount(String tag,int pageNo, String mobileModel);
 	
 	public List<AndroidAppSec> findNewAppByPackageName(String packagename, String mobileModel);
+	
+	public List<AndroidAppSec> findNewAppByPackageName(String packagename);
 
 	public Pagination findclassifyAppsByChannelName(String channelName, int pageNo, String mobileModel);
 

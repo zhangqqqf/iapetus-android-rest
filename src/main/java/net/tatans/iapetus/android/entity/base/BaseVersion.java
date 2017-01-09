@@ -24,7 +24,9 @@ public abstract class BaseVersion implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer versionCode;
+//	private Integer androidAppSecId;
 	private String versionName ;
+	private String sizes ;
 	private double gradle;
 	
 	private Integer packageId;
@@ -89,6 +91,22 @@ public abstract class BaseVersion implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getSizes() {
+		return sizes;
+	}
+	public void setSizes(String sizes) {
+		this.sizes = sizes;
+	}
+	
+/*	public Integer getAndroidAppSecId() {
+		return androidAppSecId;
+	}
+	public void setAndroidAppSecId(Integer androidAppSecId) {
+		this.androidAppSecId = androidAppSecId;
+	}*/
+	public AndroidAppSec getAndroidAppSec() {
+		return androidAppSec;
 	}
 	@Override
 	public int hashCode() {

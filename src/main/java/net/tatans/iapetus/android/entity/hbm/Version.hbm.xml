@@ -4,15 +4,20 @@
 		<meta attribute="sync-DAO">false</meta>
 		<cache usage="read-write"/>
 		<id name="id" type="java.lang.Integer" column="id"><generator class="identity"/></id>
-		<property name="versionCode" column="versionCode" type="integer"/>
+		<property name="versionCode" column="versionCode" type="integer"></property>
+	<!-- 	<composite-id>
+        	<key-property name="versionCode" column="versionCode" type="integer"/>  	
+        	<key-property name="androidAppSecId" column="packageId" />
+        </composite-id> -->
 		<property name="versionName" column="versionName" type="string"/>
+		<property name="sizes" column="sizes" type="string"/>
 		<property name="gradle" column="gradle" type="double"/>
-		<property name="packageId" column="packageId" type="integer"/>
+		<!-- <property name="packageId" column="packageId" type="integer"/> -->
 		<set name="comment" cascade="save-update">
             <key column="id"></key>
             <one-to-many class="Version"/>
         </set>
-<!-- 	<many-to-one name="androidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
-		<many-to-one name="users" column="usersId" class="User" fetch="select" cascade="save-update"/>  -->
+		<many-to-one name="androidAppSec" column="packageId" class="AndroidAppSec" fetch="select" cascade="save-update"/>  
+		<many-to-one name="users" column="usersId" class="User" fetch="select" cascade="save-update"/> 
 	</class>
 </hibernate-mapping>

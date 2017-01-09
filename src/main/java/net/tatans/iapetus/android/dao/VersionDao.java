@@ -7,4 +7,8 @@ public interface VersionDao {
 	public Version getVersionByPackageNameAndVersionName(int packageId,String versionName);
 	
 	public void updateVersion(Version version);
+	
+	public String saveDifferentVersion(Version version);
+	
+	public boolean save(Version version);
 }

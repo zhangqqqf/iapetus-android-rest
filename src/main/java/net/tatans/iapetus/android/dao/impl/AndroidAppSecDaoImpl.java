@@ -122,10 +122,8 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		System.out.println(imei+"::"+sign);
 //		find("from net.tatans.iapetus.android.entity.Imei  where imei=123 and (select sign from AndroidAppSecSign  c where c.sign=?) is  null");
 		if(find("select imei from net.tatans.iapetus.android.entity.Imei  where imei=? and (select sign from AndroidAppSecSign  c where c.sign=?) is not null",imei,sign).size()>0){
-			System.out.println(2);
 			return "true";
 		}
-		System.out.println(1);
 		return "false";
 	}
 
@@ -133,5 +131,19 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 	public Pagination findAppsBySumCount(String tag,int pageNo, String mobileModel){
 		Finder f=Finder.create("from AndroidAppSec bean order by down DESC");
 		return find(f, pageNo, countQueryResult(f)+1);
+	}
+
+	@Override
+	public List<AndroidAppSec> findNewAppByPackageName(String packagename) {
+		Finder finder=Finder.create("from AndroidAppSec bean where bean.packageName = :packageName");
+		finder.setParam("packageName", packagename);
+		List<AndroidAppSec> list = find(finder);
+		return list;
+	}
+
+	@Override
+	public void saveOrUpdate(AndroidAppSec bean) {
+		// TODO Auto-generated method stub
+		 getSession().saveOrUpdate(bean);;
 	}
 }
