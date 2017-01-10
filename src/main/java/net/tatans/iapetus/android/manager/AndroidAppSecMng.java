@@ -51,7 +51,7 @@ public interface AndroidAppSecMng{
 	
 	public boolean saveCommentApp(String userName,int packageId,String versionName,String comment,int score);
 	
-	public String uploadApk(MultipartFile apkFile) throws Exception;
+	public String uploadApk(MultipartFile apkFile ,String packageName, String versionName) throws Exception;
 	
 	public List<Comment> getUserCommentApp(int packageId,String versionName);
 	

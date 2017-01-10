@@ -2,9 +2,6 @@ package net.tatans.iapetus.android.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Transaction;
-
 import net.tatans.android.common.hibernate3.Finder;
 import net.tatans.android.common.hibernate3.HibernateBaseDao;
 import net.tatans.android.common.page.Pagination;
@@ -75,11 +72,12 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 	
 	@Override
 	public int updateSumDownloadApp(String packageName) {
-		Transaction trans=getOpenSession().beginTransaction();
+//		Transaction trans=getOpenSession().beginTransaction();
 		String hql="update AndroidAppSec tt set tt.down=tt.down+1 where tt.packageName='"+packageName+"'";
-		Query queryupdate=getOpenSession().createQuery(hql);
-		int ret=queryupdate.executeUpdate();
-		trans.commit();
+//		Query queryupdate=getOpenSession().createQuery(hql);
+//		int ret=queryupdate.executeUpdate();
+		int ret=getSession().createQuery(hql).executeUpdate();
+//		trans.commit();
 		return ret;
 	}
 	
@@ -91,14 +89,20 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 		return find(f, pageNo, countQueryResult(f)+1);
 	}
 
-	@Override
+	/*@Override
 	public Pagination searchAppByAppName(String appName,int pageNo, String mobileModel) {
 		    Finder finder=Finder.create("from AndroidAppSec bean where lower(bean.appName) like :appName and ( bean.mobileModel='all' or bean.mobileModel=:mobileModel ) order by weight desc ");
 	    	finder.setParam("appName","%"+appName.toLowerCase()+"%");
 	    	finder.setParam("mobileModel",mobileModel);
 	    	return find(finder, pageNo,countQueryResult(finder)+1);
+	}*/
+	@Override
+	public Pagination searchAppByAppName(String appName,int pageNo, String mobileModel) {
+		    Finder finder=Finder.create("from AndroidAppSec bean where lower(bean.appName) like :appName order by weight desc ");
+	    	finder.setParam("appName","%"+appName.toLowerCase()+"%");
+//	    	finder.setParam("mobileModel",mobileModel);
+	    	return find(finder, pageNo,countQueryResult(finder)+1);
 	}
-	
 	@Override
 	public Pagination findSpecifyApps(String appName, String mobileModel) {
 		    Finder finder=Finder.create("from AndroidAppSec bean where bean.appName=:appName and ( bean.mobileModel='all' or bean.mobileModel=:mobileModel ) order by weight desc ");

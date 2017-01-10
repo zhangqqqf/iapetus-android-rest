@@ -11,7 +11,7 @@ public class Constans {
 	public final static String ANDROID_MARK_PREFIX="appmark";
 	
 	public final static String ANDROID_bucketName="androd-app-store";//测试时候改成tatans-bucket-test tatans-bucket-other
-	public final static String ANDROID_APP_PREFIX="apksource";
+	public final static String ANDROID_APP_PREFIX="shareApp";
 	public final static String ANDROID_IMGE_PREFIX="img";
 	public final static String APP_VERSION_EXISTS="2";
 	public final static String TRUE="true";

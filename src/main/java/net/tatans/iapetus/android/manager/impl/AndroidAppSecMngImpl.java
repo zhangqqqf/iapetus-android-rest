@@ -1,26 +1,17 @@
 package net.tatans.iapetus.android.manager.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import net.tatans.android.common.hibernate3.Updater;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
-import net.tatans.iapetus.android.dao.AndroidChannelDao;
 import net.tatans.iapetus.android.dao.AndroidChannelSecDao;
 import net.tatans.iapetus.android.dao.CommentDao;
 import net.tatans.iapetus.android.dao.UserDao;
 import net.tatans.iapetus.android.dao.VersionDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
-import net.tatans.iapetus.android.entity.AndroidChannel;
 import net.tatans.iapetus.android.entity.AndroidChannelSec;
 import net.tatans.iapetus.android.entity.AndroidOssUtil;
-import net.tatans.iapetus.android.entity.ApkInfo;
-import net.tatans.iapetus.android.entity.ApkUtil;
 import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.User;
 import net.tatans.iapetus.android.entity.Version;
@@ -160,20 +151,19 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	}
 
 	@Override
-	public String uploadApk(MultipartFile apkFile) throws Exception {
+	public String uploadApk(MultipartFile apkFile,String packageName, String versionName) throws Exception {
 		ObjectMetadata objectMetadata =new ObjectMetadata();
 		objectMetadata.setContentLength(apkFile.getSize());
 		
-/*		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
-		System.out.println("flag："+flag);
+		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
+		System.out.println("uploadApk_flag："+flag);
 		if(flag==true)
-			return "该文件已经存在，请勿重复上传。";*/
+			return "该文件已经存在，请勿重复上传。";
 		//AndroidOssUtil.deleteFile(Constans.apkPath(packageName, versionName, ".apk"));
-		AndroidOssUtil.uploadInputStream(apkFile.getInputStream(), objectMetadata, Constans.apkPath("aa", "9.9", ".apk"));
-		
-		/*	String url=AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk"));
-		System.out.println("url:"+url);*/
-		return "";
+		AndroidOssUtil.uploadInputStream(apkFile.getInputStream(), objectMetadata, Constans.apkPath(packageName, versionName, ".apk"));
+		String url=AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk"));
+		System.out.println("url:"+url);
+		return "true";
 	}
 
 	@Override

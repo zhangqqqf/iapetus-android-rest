@@ -17,8 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
-import net.tatans.iapetus.android.entity.AndroidChannel;
 import net.tatans.iapetus.android.entity.AndroidChannelSec;
+import net.tatans.iapetus.android.entity.AndroidOssUtil;
 import net.tatans.iapetus.android.entity.Comment;
 import net.tatans.iapetus.android.entity.Version;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
@@ -99,10 +99,15 @@ public class FindAppSec {
 	@ResponseBody
 	@RequestMapping(value = "/downLoadApp.do")
 	public String downloadApp(String packageName,String versionName,HttpServletResponse response) throws IOException {
-		response.sendRedirect("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
-		System.out.println("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
+		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
+		if(flag==true){
+			response.sendRedirect(AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk")));
+		}else{
+			response.sendRedirect("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
+		}
+		
 		int intCount=mng.updateSumDownloadApp(packageName);
-		//int intCount=0;
+		System.out.println("intcount:"+intCount);
 		if(intCount==1){
 			return true+"";
 		}else{
@@ -229,6 +234,7 @@ public class FindAppSec {
 	public String findSpecialApps(String mobileModel,HttpServletRequest request) {
 		String  appName=RequestUtils.getQueryParam(request, "appName");
 		Pagination page=mng.findSpecifyApps(appName,mobileModel);
+		@SuppressWarnings("unchecked")
 		List<AndroidAppSec> list=(List<AndroidAppSec>) page.getList();
 		String json=null;
 		if(list.size()==0){
@@ -241,17 +247,29 @@ public class FindAppSec {
 		}
 	 	return StringUtil.toResponseStr(true, "\"pageCount\":"+page.getTotalPage(), json);
 	}
+	/**
+	 * 跳转到指定应用界面
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/findAllVersion.do")
+	public String findAllVersion(String packageName,HttpServletRequest request) {
+		
+	 	return null;
+	}
 	@ResponseBody
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
-	public String uploadApps(String userName,String sizes,String appName,String packageName,String versionName,@RequestParam(defaultValue="1",required=false)int versionCode,String sign,Integer cid,
+	public String uploadApps(String decription,String userName,String sizes,String appName,String packageName,String versionName,@RequestParam(defaultValue="1",required=false)int versionCode,String sign,Integer cid,
 			HttpServletRequest request,@RequestParam(value = "file", required = true) MultipartFile file) throws Exception {
-		System.out.println("--userName---------"+userName);
 		List<AndroidAppSec> list = mng.findNewAppByPackageName(packageName);
+		if(null==decription||"".equals(decription)){
+			decription=appName;
+		}
 		if(!list.isEmpty()){
 			System.out.println("signs:"+list.get(0).getSigns());
 			if(null==list.get(0).getSigns()||"".equals(list.get(0).getSigns())){
 				//签名为空，插入签名
 				list.get(0).setSigns(sign);
+				
 				mng.saveOrUpdate(list.get(0));
 				Version version = new Version();
 				version.setVersionName(versionName);
@@ -263,18 +281,10 @@ public class FindAppSec {
 					//该应用此版本已经存在
 					return Constans.APP_VERSION_EXISTS;
 				}
-				mng.uploadApk(file);
+				mng.uploadApk(file,packageName,versionName);
 				return Constans.TRUE;
 			}
 			if (sign.equals(list.get(0).getSigns())) {
-				System.out.println("--package---------"+list.get(0).getId());
-				//签名一样，保存签名正常上传。
-			//	AndroidChannelSec androidChannel=mng.findByChannelId(cid);		
-				/*AndroidAppSec androidAppSec = new AndroidAppSec();
-				androidAppSec.setAppName(appName);
-				androidAppSec.setPackageName(packageName);
-				androidAppSec.setSize(size);
-				androidAppSec.setChannel(androidChannel);*/
 
 				Version version = new Version();
 				version.setVersionName(versionName);
@@ -282,57 +292,42 @@ public class FindAppSec {
 				version.setSizes(sizes);
 				version.setAndroidAppSec(list.get(0));
 				version.setUsers(mng.getUserByUserName(userName));
-				mng.updateVersion(version);
-				mng.uploadApk(file);
+				
+				if(!mng.saveDifferentVersion(version).equals(Constans.TRUE)){
+					//该应用此版本已经存在
+					return Constans.APP_VERSION_EXISTS;
+				}
+				mng.uploadApk(file,packageName,versionName);
 				return Constans.TRUE;
 			} else {
 				//签名不同把他return掉。
-				return 0+"";
+				return "3";
 			}
-		}
-		/*if(file.isEmpty()){
-			return StringUtil.toResponseStr(false, null, null);
-		}
-		
-		*/
-	 	return true+"";
-	}
-	@ResponseBody
-	@RequestMapping(value = "/upload2.do")
-	public String uploadApps2(String packageName,HttpServletRequest request) throws Exception {
-		
-		
-		/*AndroidChannelSec androidChannel=mng.findByChannelId(cid);
-		
-		AndroidAppSec androidAppSec = new AndroidAppSec();
-		androidAppSec.setAppName(appName);
-		androidAppSec.setPackageName(packageName);
-		androidAppSec.setSize(size);
-		androidAppSec.setChannel(androidChannel);
-
-		Version version = new Version();
-		version.setVersionName(versionName);
-		version.setVersionCode(versionCode);
-		version.setAndroidAppSec(androidAppSec);*/
-		System.out.println("---"+packageName);
-		List<AndroidAppSec> list = mng.findNewAppByPackageName(packageName);
-		System.out.println("---"+list.isEmpty());
-		if(!list.isEmpty()){
-//			System.out.println("signs:"+list.get(0).getSigns().length());
-//			System.out.println("signs:"+list.get(0).getSigns().equals(null));
-			System.out.println("signs__:"+(null==list.get(0).getSigns()));
-			/*if (sign.equals(list.get(0))) {
-				
-			} else {
-
-			}*/
-		}
-		/*if(file.isEmpty()){
-			return StringUtil.toResponseStr(false, null, null);
+		}else{
+			//该应用不存在保存应用,以及对应的版本
+			AndroidChannelSec androidChannel=mng.findByChannelId(cid);		
+			AndroidAppSec androidAppSec = new AndroidAppSec();
+			androidAppSec.setAppName(appName);
+			androidAppSec.setPackageName(packageName);
+			androidAppSec.setChannel(androidChannel);
+			androidAppSec.setVersionName(versionName);
+			androidAppSec.setDecription(decription);
+			androidAppSec.setVersionCode(versionCode);
+			androidAppSec.setSigns(sign);
+			androidAppSec.setDown(0);
+			androidAppSec.setSize(sizes);
+			
+			Version version = new Version();
+			version.setVersionName(versionName);
+			version.setVersionCode(versionCode);
+			version.setSizes(sizes);
+			version.setAndroidAppSec(androidAppSec);
+			version.setUsers(mng.getUserByUserName(userName));
+			mng.saveDifferentVersion(version);
+			mng.uploadApk(file,packageName,versionName);
+			return Constans.TRUE;
 		}
 		
-		mng.uploadApk(file);*/
-	 	return true+"";
 	}
 	@Autowired
 	private AndroidAppSecMng mng;
