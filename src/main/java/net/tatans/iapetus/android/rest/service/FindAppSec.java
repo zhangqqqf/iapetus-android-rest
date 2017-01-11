@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import net.tatans.android.common.page.Pagination;
 import net.tatans.android.common.web.RequestUtils;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
@@ -28,7 +31,7 @@ import net.tatans.iapetus.android.rest.util.StringUtil;
 
 /**
  * 针对新版本天坦商店app
- * @author windows7
+ * @author Yuriy
  *
  */
 @Controller
@@ -198,11 +201,14 @@ public class FindAppSec {
 	 * @param pageNo
 	 * @param request
 	 * @return
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/searchapp.do")
 	public String findSearchInputApp(String appName,String mobileModel,@RequestParam(defaultValue="1",required=false)Integer pageNo,
-			HttpServletRequest request) {
+			HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
 		Pagination page=null;
 		try {
 			page=mng.searchAppByAppName(appName,pageNo,mobileModel);
@@ -219,11 +225,8 @@ public class FindAppSec {
 		if(list.size()==0){
 			return StringUtil.toResponseStr(false, "\"pageNo\":"+pageNo+",\"pageCount\":"+null, null);
 		}
-		try {
-			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
+	
 	 	return StringUtil.toResponseStr(true, "\"pageNo\":"+pageNo+",\"pageCount\":"+page.getTotalPage(), json);
 	}
 	/**
@@ -249,12 +252,20 @@ public class FindAppSec {
 	}
 	/**
 	 * 跳转到指定应用界面
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/findAllVersion.do")
-	public String findAllVersion(String packageName,HttpServletRequest request) {
-		
-	 	return null;
+	public String findAllVersion(String packageName,HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
+		List<Version> list = mng.findAllVersion(packageName);
+		if(list.size()==0){
+			return "false";
+		}
+		String json=null;
+		json=jsonMapper.toJsonStr(list,new String[] {"versionName","versionCode","gradle","sizes"});
+	 	return json;
 	}
 	@ResponseBody
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
@@ -277,6 +288,7 @@ public class FindAppSec {
 				version.setSizes(sizes);
 				version.setAndroidAppSec(list.get(0));
 				version.setUsers(mng.getUserByUserName(userName));
+				version.setGradle(5);
 				if(!mng.saveDifferentVersion(version).equals(Constans.TRUE)){
 					//该应用此版本已经存在
 					return Constans.APP_VERSION_EXISTS;
@@ -292,6 +304,7 @@ public class FindAppSec {
 				version.setSizes(sizes);
 				version.setAndroidAppSec(list.get(0));
 				version.setUsers(mng.getUserByUserName(userName));
+				version.setGradle(5);
 				
 				if(!mng.saveDifferentVersion(version).equals(Constans.TRUE)){
 					//该应用此版本已经存在
@@ -323,6 +336,7 @@ public class FindAppSec {
 			version.setSizes(sizes);
 			version.setAndroidAppSec(androidAppSec);
 			version.setUsers(mng.getUserByUserName(userName));
+			version.setGradle(5);
 			mng.saveDifferentVersion(version);
 			mng.uploadApk(file,packageName,versionName);
 			return Constans.TRUE;

@@ -1,5 +1,7 @@
 package net.tatans.iapetus.android.dao;
 
+import java.util.List;
+
 import net.tatans.iapetus.android.entity.Version;
 
 public interface VersionDao {
@@ -11,4 +13,6 @@ public interface VersionDao {
 	public String saveDifferentVersion(Version version);
 	
 	public boolean save(Version version);
+	
+	public List<Version> findAllVersion(String packageName);
 }

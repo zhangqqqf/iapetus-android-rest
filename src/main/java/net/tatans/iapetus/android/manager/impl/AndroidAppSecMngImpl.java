@@ -196,4 +196,10 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 		return versionDao.saveDifferentVersion(version);
 	}
 
+	@Override
+	public List<Version> findAllVersion(String packageName) {
+		// TODO Auto-generated method stub
+		return versionDao.findAllVersion(packageName);
+	}
+
 }

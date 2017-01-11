@@ -68,6 +68,15 @@ public class VersionDaoImpl extends HibernateBaseDao<Version, Integer> implement
 		}
 	}
 
+	@Override
+	public List<Version> findAllVersion(String packageName) {
+		// TODO Auto-generated method stub'
+		Finder finder=Finder.create("from Version bean where bean.androidAppSec.packageName=:packageName ");
+		finder.setParam("packageName",packageName);
+		List<Version> list=find(finder);
+		return list;
+	}
+
 	
 	
 }

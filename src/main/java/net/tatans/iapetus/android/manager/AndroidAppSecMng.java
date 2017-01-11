@@ -63,4 +63,6 @@ public interface AndroidAppSecMng{
 	
 	public String saveDifferentVersion(Version version);
 	
+	public List<Version> findAllVersion(String packageName);
+	
 }
