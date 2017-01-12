@@ -30,5 +30,51 @@ public class UserDaoImpl extends HibernateBaseDao<User, Integer> implements User
 					return list.get(0);
 				}
 	}
+
+
+	@Override
+	public int save(User user) {
+		return (Integer)getSession().save(user);
+	}
+
+
+	@Override
+	public String getUserNameByLogin(String phoneNumber, String password) {
+		Finder finder=Finder.create("from User bean where bean.phoneNumber=:phoneNumber and bean.password=:password");
+		finder.setParam("phoneNumber",phoneNumber);
+		finder.setParam("password",password);
+		List<User> list=find(finder);
+		if(list.size()==0){
+			return null;
+		}else{
+			return list.get(0).getUserName();
+		}
+	}
+
+
+	@Override
+	public String getUserNameByPhoneName(String phoneNumber) {
+		Finder finder=Finder.create("from User bean where bean.phoneNumber=:phoneNumber");
+		finder.setParam("phoneNumber",phoneNumber);
+		List<User> list=find(finder);
+		if(list.size()==0){
+			return null;
+		}else{
+			return list.get(0).getUserName();
+		}
+	}
+
+
+	@Override
+	public String modifyUserName(String userName) {
+		Finder finder=Finder.create("from User bean where bean.userName=:userName");
+		finder.setParam("userName",userName);
+		List<User> list=find(finder);
+		if(list.size()==0){
+			return null;
+		}else{
+			return list.get(0).getUserName();
+		}
+	}
 	
 }

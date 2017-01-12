@@ -23,6 +23,7 @@ import net.tatans.iapetus.android.entity.AndroidAppSec;
 import net.tatans.iapetus.android.entity.AndroidChannelSec;
 import net.tatans.iapetus.android.entity.AndroidOssUtil;
 import net.tatans.iapetus.android.entity.Comment;
+import net.tatans.iapetus.android.entity.User;
 import net.tatans.iapetus.android.entity.Version;
 import net.tatans.iapetus.android.manager.AndroidAppSecMng;
 import net.tatans.iapetus.android.rest.util.Constans;
@@ -266,6 +267,15 @@ public class FindAppSec {
 		String json=null;
 		json=jsonMapper.toJsonStr(list,new String[] {"versionName","versionCode","gradle","sizes"});
 	 	return json;
+	}
+	@ResponseBody
+	@RequestMapping(value = "/registerUser.do")
+	public String registerUser(String phoneNumber,String password,String country){
+		User user = new User();
+		user.setPhoneNumber(phoneNumber);
+		user.setCountry(country);
+		user.setPassword(password);
+		return "";
 	}
 	@ResponseBody
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)

@@ -33,6 +33,7 @@ public abstract class BaseUser implements Serializable {
 	private String userName;
 	private String password;
 	private String phoneNumber ;
+	private String country;
 	private String enabled;
 	private Set<Version> version=  new HashSet<Version>();
 	private Set<Comment> comment=  new HashSet<Comment>();
@@ -104,6 +105,12 @@ public abstract class BaseUser implements Serializable {
 		this.enabled = enabled;
 	}
 
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
