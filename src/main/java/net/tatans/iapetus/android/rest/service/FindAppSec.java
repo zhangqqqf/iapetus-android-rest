@@ -353,6 +353,30 @@ public class FindAppSec {
 		}
 		
 	}
+	@ResponseBody
+	@RequestMapping(value = "/saveUser.do")
+   public int saveUser(User user){
+	   return mng.saveUser(user);
+   }
+	
+	@ResponseBody
+	@RequestMapping(value = "/getUserNameByLogin.do")
+	public String getUserNameByLogin(String phoneNumber,String password){
+		return mng.getUserNameByLogin(phoneNumber, password);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getUserNameByPhoneName.do")
+	public String getUserNameByPhoneName(String phoneNumber){
+		return mng.getUserNameByPhoneName(phoneNumber);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateUserName.do")
+	public String updateUserName(String updateUserName,String userName){
+		return mng.updateUserName(updateUserName, userName);
+	}
+	
 	@Autowired
 	private AndroidAppSecMng mng;
 	@Autowired

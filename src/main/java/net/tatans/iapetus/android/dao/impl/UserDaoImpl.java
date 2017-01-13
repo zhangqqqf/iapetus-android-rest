@@ -33,7 +33,7 @@ public class UserDaoImpl extends HibernateBaseDao<User, Integer> implements User
 
 
 	@Override
-	public int save(User user) {
+	public int saveUser(User user) {
 		return (Integer)getSession().save(user);
 	}
 
@@ -66,7 +66,7 @@ public class UserDaoImpl extends HibernateBaseDao<User, Integer> implements User
 
 
 	@Override
-	public String modifyUserName(String userName) {
+	public String updateUserName(String modifyUserName,String userName) {
 		Finder finder=Finder.create("from User bean where bean.userName=:userName");
 		finder.setParam("userName",userName);
 		List<User> list=find(finder);

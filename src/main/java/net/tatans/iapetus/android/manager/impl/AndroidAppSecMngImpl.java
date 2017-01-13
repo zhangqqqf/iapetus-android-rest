@@ -202,4 +202,28 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 		return versionDao.findAllVersion(packageName);
 	}
 
+	@Override
+	public int saveUser(User user) {
+		// TODO Auto-generated method stub
+		return userDao.saveUser(user);
+	}
+
+	@Override
+	public String getUserNameByLogin(String phoneNumber, String password) {
+		// TODO Auto-generated method stub
+		return userDao.getUserNameByLogin(phoneNumber, password);
+	}
+
+	@Override
+	public String getUserNameByPhoneName(String phoneNumber) {
+		// TODO Auto-generated method stub
+		return userDao.getUserNameByPhoneName(phoneNumber);
+	}
+
+	@Override
+	public String updateUserName(String updateUserName, String userName) {
+		// TODO Auto-generated method stub
+		return userDao.updateUserName(updateUserName, userName);
+	}
+
 }

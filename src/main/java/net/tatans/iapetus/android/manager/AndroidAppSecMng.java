@@ -65,4 +65,12 @@ public interface AndroidAppSecMng{
 	
 	public List<Version> findAllVersion(String packageName);
 	
+	public int saveUser(User user);
+	
+	public String getUserNameByLogin(String phoneNumber,String password);
+	
+	public String getUserNameByPhoneName(String phoneNumber);
+	
+	public String updateUserName(String updateUserName,String userName);
+	
 }
