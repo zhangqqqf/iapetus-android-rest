@@ -226,4 +226,16 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 		return userDao.updateUserName(updateUserName, userName);
 	}
 
+	@Override
+	public String registerUser(User user) {
+		// TODO Auto-generated method stub
+		return userDao.registerUser(user);
+	}
+
+	@Override
+	public String updatePassword(String modifyPassword, String phoneNumber) {
+		// TODO Auto-generated method stub
+		return userDao.updatePassword(modifyPassword, phoneNumber);
+	}
+
 }

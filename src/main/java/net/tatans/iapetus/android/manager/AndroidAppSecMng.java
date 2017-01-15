@@ -73,4 +73,8 @@ public interface AndroidAppSecMng{
 	
 	public String updateUserName(String updateUserName,String userName);
 	
+	public String registerUser(User user);
+	
+	public String updatePassword(String modifyPassword,String phoneNumber);
+	
 }

@@ -268,6 +268,7 @@ public class FindAppSec {
 		json=jsonMapper.toJsonStr(list,new String[] {"versionName","versionCode","gradle","sizes"});
 	 	return json;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/registerUser.do")
 	public String registerUser(String phoneNumber,String password,String country){
@@ -275,7 +276,8 @@ public class FindAppSec {
 		user.setPhoneNumber(phoneNumber);
 		user.setCountry(country);
 		user.setPassword(password);
-		return "";
+		user.setEnabled("1");
+		return mng.registerUser(user);
 	}
 	@ResponseBody
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
@@ -358,9 +360,18 @@ public class FindAppSec {
    public int saveUser(User user){
 	   return mng.saveUser(user);
    }
+	@ResponseBody
+	@RequestMapping(value = "/saveUser.do")
+   public int saveUser(String password, String phoneNumber,String country){
+		User user = new User();
+		user.setCountry(country);
+		user.setPassword(password);
+		user.setPhoneNumber(phoneNumber);
+	   return mng.saveUser(user);
+   }
 	
 	@ResponseBody
-	@RequestMapping(value = "/getUserNameByLogin.do")
+	@RequestMapping(value = "/loginUser.do")
 	public String getUserNameByLogin(String phoneNumber,String password){
 		return mng.getUserNameByLogin(phoneNumber, password);
 	}
@@ -372,9 +383,15 @@ public class FindAppSec {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/updateUserName.do")
+	@RequestMapping(value = "/modifyUserName.do")
 	public String updateUserName(String updateUserName,String userName){
 		return mng.updateUserName(updateUserName, userName);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/modifyPassword.do")
+	public String updatePassword(String modifyPassword, String phoneNumber){
+		return mng.updatePassword(modifyPassword, phoneNumber);
 	}
 	
 	@Autowired

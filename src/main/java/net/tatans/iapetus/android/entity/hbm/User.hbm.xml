@@ -7,6 +7,7 @@
 		<property name="userName" column="userName" type="string"/>
 		<property name="password" column="password" type="string"/>
 		<property name="phoneNumber" column="phoneNumber" type="string"/>
+		<property name="country" column="country" type="string"/>
 		<property name="enabled" column="enabled" type="string"/>
 		<set name="version" cascade="save-update">
             <key column="id"></key>
