@@ -24,12 +24,19 @@ public abstract class BaseVersion implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer versionCode;
-//	private Integer androidAppSecId;
+	private Integer androidAppSecId;
 	private String versionName ;
 	private String sizes ;
 	private double gradle;
 	
-	private Integer packageId;
+	public Integer getAndroidAppSecId() {
+		return androidAppSecId;
+	}
+	public void setAndroidAppSecId(Integer androidAppSecId) {
+		this.androidAppSecId = androidAppSecId;
+	}
+
+//	private Integer packageId;
 	
 	private Set<Comment> comment = new HashSet<Comment>();
 	
@@ -43,12 +50,12 @@ public abstract class BaseVersion implements Serializable {
 	public void setComment(Set<Comment> comment) {
 		this.comment = comment;
 	}
-	public Integer getPackageId() {
-		return packageId;
-	}
-	public void setPackageId(Integer packageId) {
-		this.packageId = packageId;
-	}
+//	public Integer getPackageId() {
+//		return packageId;
+//	}
+//	public void setPackageId(Integer packageId) {
+//		this.packageId = packageId;
+//	}
 
 	public Integer getId() {
 		return id;
@@ -113,12 +120,13 @@ public abstract class BaseVersion implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((androidAppSec == null) ? 0 : androidAppSec.hashCode());
+		result = prime * result + ((androidAppSecId == null) ? 0 : androidAppSecId.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(gradle);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((packageId == null) ? 0 : packageId.hashCode());
+		result = prime * result + ((sizes == null) ? 0 : sizes.hashCode());
 		result = prime * result + ((users == null) ? 0 : users.hashCode());
 		result = prime * result + ((versionCode == null) ? 0 : versionCode.hashCode());
 		result = prime * result + ((versionName == null) ? 0 : versionName.hashCode());
@@ -138,6 +146,11 @@ public abstract class BaseVersion implements Serializable {
 				return false;
 		} else if (!androidAppSec.equals(other.androidAppSec))
 			return false;
+		if (androidAppSecId == null) {
+			if (other.androidAppSecId != null)
+				return false;
+		} else if (!androidAppSecId.equals(other.androidAppSecId))
+			return false;
 		if (comment == null) {
 			if (other.comment != null)
 				return false;
@@ -150,10 +163,10 @@ public abstract class BaseVersion implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (packageId == null) {
-			if (other.packageId != null)
+		if (sizes == null) {
+			if (other.sizes != null)
 				return false;
-		} else if (!packageId.equals(other.packageId))
+		} else if (!sizes.equals(other.sizes))
 			return false;
 		if (users == null) {
 			if (other.users != null)

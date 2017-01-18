@@ -23,9 +23,10 @@ public class VersionDaoImpl extends HibernateBaseDao<Version, Integer> implement
 	public Version getVersionByPackageNameAndVersionName(int packageId, String versionName) {
 		// TODO Auto-generated method stub
 		Finder finder=Finder.create("from Version bean where bean.androidAppSec.id=:packageId and bean.versionName=:versionName");
-		finder.setParam("versionName",versionName);
 		finder.setParam("packageId",packageId);
+		finder.setParam("versionName",versionName);
 		List<Version> list=find(finder);
+		System.out.println("list.size()"+list.size());
 		if(list.size()==0){
 			return null;
 		}else{

@@ -14,4 +14,8 @@ public interface UserDao {
 	
 	public String updateUserName(String modifyUserName,String userName);
 	
+	public String updatePassword(String modifyPassword,String phoneNumber);
+	
+	public String registerUser(User user);
+	
 }

@@ -171,6 +171,16 @@ public class FindAppSec {
 	 	return json;
 	}
 	/**
+	 * 获取用户评论列表
+	 * @throws IOException 
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/getDownByPackageId.do")
+	public String getDownByPackage(int packageId){
+		AndroidAppSec appSec=mng.findById(packageId);
+	 	return appSec.getDown().toString();
+	}
+	/**
 	 * 根据标签名查询APP
 	 * @param tag
 	 * @param pageNo
@@ -287,13 +297,18 @@ public class FindAppSec {
 		if(null==decription||"".equals(decription)){
 			decription=appName;
 		}
+		//这个应用存在，不同版本
 		if(!list.isEmpty()){
 			System.out.println("signs:"+list.get(0).getSigns());
 			if(null==list.get(0).getSigns()||"".equals(list.get(0).getSigns())){
 				//签名为空，插入签名
 				list.get(0).setSigns(sign);
-				
+				if(versionCode>list.get(0).getVersionCode()){
+					list.get(0).setVersionCode(versionCode);
+					list.get(0).setVersionName(versionName);
+				}
 				mng.saveOrUpdate(list.get(0));
+				
 				Version version = new Version();
 				version.setVersionName(versionName);
 				version.setVersionCode(versionCode);
@@ -309,7 +324,13 @@ public class FindAppSec {
 				return Constans.TRUE;
 			}
 			if (sign.equals(list.get(0).getSigns())) {
-
+				//签名非空，不插入签名
+				if(versionCode>list.get(0).getVersionCode()){
+					list.get(0).setVersionCode(versionCode);
+					list.get(0).setVersionName(versionName);
+					mng.saveOrUpdate(list.get(0));
+				}
+				
 				Version version = new Version();
 				version.setVersionName(versionName);
 				version.setVersionCode(versionCode);

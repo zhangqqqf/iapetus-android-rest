@@ -187,7 +187,7 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 	@Override
 	public void saveOrUpdate(AndroidAppSec bean) {
 		// TODO Auto-generated method stub
-		dao.save(bean);
+		dao.saveOrUpdate(bean);
 	}
 
 	@Override

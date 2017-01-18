@@ -88,7 +88,7 @@ public abstract class BaseUser implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	@JsonIgnore
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -96,7 +96,7 @@ public abstract class BaseUser implements Serializable {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	@JsonIgnore
 	public String getEnabled() {
 		return enabled;
 	}

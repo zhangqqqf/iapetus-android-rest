@@ -99,7 +99,7 @@ public class UserDaoImpl extends HibernateBaseDao<User, Integer> implements User
 		}
 		String userName;
 		Integer integer =(Integer)getSession().save(user);
-		userName="嗨"+user.getId();
+		userName="嗨00"+user.getId();
 		user.setUserName(userName);
 		getSession().saveOrUpdate(user);
 		return userName;
