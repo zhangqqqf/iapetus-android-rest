@@ -50,7 +50,12 @@ public class CommentDaoImpl extends HibernateBaseDao<Comment, Integer> implement
 
 	@Override
 	public double getAvgScoreByVersionId(Version version) {
-		double a =(double)findUnique("select avg(bean.score) from Comment bean where versionId=?", version.getId());
+		double a;
+		try {
+			 a =(double)findUnique("select avg(bean.score) from Comment bean where versionId=?", version.getId());
+		} catch (Exception e) {
+			 a=5;
+		}
 		return a;
 	}
 
