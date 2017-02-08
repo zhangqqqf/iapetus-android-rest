@@ -39,4 +39,6 @@ public interface AndroidAppSecDao {
 
 	public String validaApp(String imei, String sign);
 	
+	public String getAppStoreNewestVersion();
+	
 }

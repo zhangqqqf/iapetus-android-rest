@@ -238,4 +238,10 @@ public class AndroidAppSecMngImpl implements AndroidAppSecMng {
 		return userDao.updatePassword(modifyPassword, phoneNumber);
 	}
 
+	@Override
+	public String getAppStoreNewestVersion() {
+		// TODO Auto-generated method stub
+		return dao.getAppStoreNewestVersion();
+	}
+
 }

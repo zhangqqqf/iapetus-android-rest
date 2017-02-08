@@ -7,6 +7,7 @@ import net.tatans.android.common.hibernate3.HibernateBaseDao;
 import net.tatans.android.common.page.Pagination;
 import net.tatans.iapetus.android.dao.AndroidAppSecDao;
 import net.tatans.iapetus.android.entity.AndroidAppSec;
+import net.tatans.iapetus.android.entity.User;
 import net.tatans.iapetus.android.rest.util.Constans;
 
 public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Integer> implements AndroidAppSecDao {
@@ -149,5 +150,11 @@ public class AndroidAppSecDaoImpl extends HibernateBaseDao<AndroidAppSec, Intege
 	public void saveOrUpdate(AndroidAppSec bean) {
 		// TODO Auto-generated method stub
 		 getSession().saveOrUpdate(bean);;
+	}
+
+	@Override
+	public String getAppStoreNewestVersion() {
+		AndroidAppSec androidAppSec=findUniqueByProperty("packageName","net.accessiblility.app.store");
+		return androidAppSec.getVersionName();
 	}
 }

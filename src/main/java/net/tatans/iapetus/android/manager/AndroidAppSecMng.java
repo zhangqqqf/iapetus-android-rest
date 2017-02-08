@@ -77,4 +77,6 @@ public interface AndroidAppSecMng{
 	
 	public String updatePassword(String modifyPassword,String phoneNumber);
 	
+	public String getAppStoreNewestVersion();
+	
 }

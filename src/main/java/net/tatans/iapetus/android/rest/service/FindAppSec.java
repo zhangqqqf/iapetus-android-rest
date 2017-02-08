@@ -376,11 +376,21 @@ public class FindAppSec {
 		}
 		
 	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/saveUser.do")
    public int saveUser(User user){
 	   return mng.saveUser(user);
    }
+	
+	@ResponseBody
+	@RequestMapping(value = "/getAppStore.do")
+   public void getAppStore(HttpServletResponse response) throws IOException{
+		response.sendRedirect(AndroidOssUtil.getFileAddress(Constans.apkPath("net.accessiblility.app.store", mng.getAppStoreNewestVersion(), ".apk")));
+		int intCount=mng.updateSumDownloadApp("net.accessiblility.app.store");
+		System.out.println("intcount:"+intCount);
+   }
+	
 	@ResponseBody
 	@RequestMapping(value = "/saveUser.do")
    public int saveUser(String password, String phoneNumber,String country){
@@ -388,7 +398,7 @@ public class FindAppSec {
 		user.setCountry(country);
 		user.setPassword(password);
 		user.setPhoneNumber(phoneNumber);
-	   return mng.saveUser(user);
+	    return mng.saveUser(user);
    }
 	
 	@ResponseBody
