@@ -362,6 +362,7 @@ public class FindAppSec {
 			androidAppSec.setSigns(sign);
 			androidAppSec.setDown(0);
 			androidAppSec.setSize(sizes);
+			androidAppSec.setMobileModel("all");
 			
 			Version version = new Version();
 			version.setVersionName(versionName);
