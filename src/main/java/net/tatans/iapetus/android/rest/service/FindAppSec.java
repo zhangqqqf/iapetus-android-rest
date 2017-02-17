@@ -103,15 +103,15 @@ public class FindAppSec {
 	@ResponseBody
 	@RequestMapping(value = "/downLoadApp.do")
 	public String downloadApp(String packageName,String versionName,HttpServletResponse response) throws IOException {
-		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
-		if(flag==true){
+/*		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
+		if(flag==true){*/
 			response.sendRedirect(AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk")));
-		}else{
+		/*}else{
 			response.sendRedirect("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
-		}
+		}*/
 		
 		int intCount=mng.updateSumDownloadApp(packageName);
-		System.out.println("intcount:"+intCount);
+		//System.out.println("intcount:"+intCount);
 		if(intCount==1){
 			return true+"";
 		}else{
