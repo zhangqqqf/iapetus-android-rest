@@ -64,6 +64,30 @@ public class FindAppSec {
 		return json;
 	}
 	
+	/**
+	 * 获取所有app信息(用于自动更新)
+	 * @param packagename
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/update.do")
+	public String update(String packageName,HttpServletRequest request) {
+		String mobileModel="";
+		List<AndroidAppSec> list=new ArrayList<>();
+		if(packageName==null||packageName.equals("")){
+			list=mng.findNewsApps(mobileModel);
+		}else{
+			list=mng.findNewAppByPackageName(packageName,mobileModel);
+		}
+		String json=null;
+		try {
+			json=jsonMapper.toJsonStr(list,new String[] {"id","appName","versionCode","versionName","decription","packageName","size"});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return json;
+	}
 	@ResponseBody
 	@RequestMapping(value = "/appclassifyitem.do")
 	public String showClassifyApps(String channelName,String mobileModel,@RequestParam(defaultValue="1",required=false)Integer pageNo,
@@ -105,7 +129,7 @@ public class FindAppSec {
 	public String downloadApp(String packageName,String versionName,HttpServletResponse response) throws IOException {
 /*		boolean flag=AndroidOssUtil.verifyKey(Constans.apkPath(packageName, versionName, ".apk"));
 		if(flag==true){*/
-			response.sendRedirect(AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk")));
+		response.sendRedirect(AndroidOssUtil.getFileAddress(Constans.apkPath(packageName, versionName, ".apk")));
 		/*}else{
 			response.sendRedirect("http://other.tatans.net/apksource/all/"+packageName+"/"+versionName+".apk");
 		}*/
