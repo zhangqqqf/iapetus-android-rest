@@ -65,7 +65,7 @@ public class FindAppSec {
 	}
 	
 	/**
-	 * 获取所有app信息(用于自动更新)
+	 * 获取app信息(用于自动更新)
 	 * @param packagename
 	 * @param request
 	 * @return
